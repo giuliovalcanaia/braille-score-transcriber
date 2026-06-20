@@ -49,5 +49,4 @@
 
 ## Common gotchas
 
-- `.gitignore` is mostly a Python template and largely irrelevant for this Java project. The important ignores are `.idea/`, `.gradle/`, `build/`, `out/`.
 - No `src/main/resources` or application plugin is configured; there is no runnable `main` method yet.
