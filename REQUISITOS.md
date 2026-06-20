@@ -1,8 +1,11 @@
 # Trabalho Final
 
-- Individual ou Em Dupla
+Individual ou Em Dupla
 
-=== Leitura de Arquivos .txt ( Tema a escolha da Equipe ) ===
+### Data da entrega: 24/06
+- Tempo de apresentação: Mínimo 7, máximo 10
+
+### Leitura de Arquivos .txt ( Tema a escolha da Equipe )
 
 - No mínimo 1 cabeçalho
 - No mínimo 500 linhas de registro
