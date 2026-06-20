@@ -10,21 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ScoreTest {
     private String testFilePath;
-    private List<String> expectedMeasureNumbers;
-    private Integer expectedDivision = 2;
 
     @BeforeEach
     public void setUp() {
-        // Define o caminho para um arquivo XML de teste.
         this.testFilePath = "src/test/resources/Asa-Branca.musicxml";
-
-        // Define as saídas esperadas para os 5 primeiros compassos
-        this.expectedMeasureNumbers = new ArrayList<>();
-        this.expectedMeasureNumbers.add("1");
-        this.expectedMeasureNumbers.add("2");
-        this.expectedMeasureNumbers.add("3");
-        this.expectedMeasureNumbers.add("4");
-        this.expectedMeasureNumbers.add("5");
     }
 
     @Test
@@ -32,29 +21,28 @@ class ScoreTest {
     void testIfGetTitleIsWorkingInContructor() {
         Score score = new Score(testFilePath);
 
-        // Verifica se a extração do título funcionou
-        assertEquals("Asa branca", score.getTitle(), "O título extraído do XML está incorreto");
+        assertEquals("Asa branca", score.getTitle());
     }
 
     @Test
-    @DisplayName("Verifica atribuição de compassos")
-    public void testExtractFirstFiveMeasures() {
+    @DisplayName("Verifica leitura dos compassos")
+    public void testExtractMeasures() {
         Score score = new Score(testFilePath);
+        List<String> expectedMeasureNumbers = new ArrayList<>();
 
-        // Recupera a lista de compassos gerada pelo construtor/extractMeasures
         List<Measure> measures = score.getMeasures();
 
-        // Assert: Validações de segurança iniciais
-        assertNotNull(measures, "A lista de compassos não deveria ser nula.");
-        assertTrue(measures.size() >= 5, "O XML de teste deve conter pelo menos 5 compassos para este teste.");
+        assertNotNull(measures);
+        assertEquals(26, measures.size());
 
-        // Assert: Valida se os 5 primeiros elementos correspondem a 1, 2, 3, 4 e 5
-        for (int i = 0; i < 5; i++) {
-            assertEquals(
-                    expectedMeasureNumbers.get(i),
-                    measures.get(i).getNumber(),
-                    "O número do compasso no índice " + i + " está incorreto."
-            );
+        // Cria list com número de 1 a 26
+        for (int i = 1; i < 27; i++) {
+            expectedMeasureNumbers.add(String.valueOf(i));
+        }
+
+        // Compara essa lista com os compassos salvos em measures.
+        for (int i = 0; i < 26; i++) {
+            assertEquals(expectedMeasureNumbers.get(i), measures.get(i).getNumber());
         }
     }
 
@@ -62,20 +50,13 @@ class ScoreTest {
     @DisplayName("Verifica atribuição de divisões")
     public void testExtractDivisions() {
         Score score = new Score(testFilePath);
-
-        // Recupera a lista de compassos gerada pelo construtor/extractMeasures
         List<Measure> measures = score.getMeasures();
 
-        // Assert: Validações de segurança iniciais
-        assertNotNull(measures, "A lista de compassos não deveria ser nula.");
+        assertNotNull(measures);
 
-        // Assert: Valida se as divisões dos 5 primeiros compassos correspondem a 2
-        for (int i = 0; i < 5; i++) {
-            assertEquals(
-                    String.valueOf(expectedDivision),
-                    String.valueOf(measures.get(i).getDivisions()),
-                    "A divisão do compasso no índice " + i + " está incorreto."
-            );
+        // Verifica se a divisão de cada um dos compassos é 2
+        for (int i = 0; i < 25; i++) {
+            assertEquals(2, measures.get(i).getDivisions());
         }
     }
 }
