@@ -1,5 +1,6 @@
 # BrailleScoreTranscriber
 
+[![CI](https://github.com/giuliovalcanaia/braille-xml/actions/workflows/ci.yml/badge.svg)](https://github.com/giuliovalcanaia/braille-xml/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 > **[PT-BR]** Ferramenta automatizada para transcrição de partituras digitais no formato MusicXML para a Musicografia Braille. Desenvolvido como projeto acadêmico para a FURB (Universidade Regional de Blumenau) e focado em acessibilidade musical.
