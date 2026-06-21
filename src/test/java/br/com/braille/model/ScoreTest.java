@@ -3,6 +3,7 @@ package br.com.braille.model;
 import br.com.braille.service.Desempacotador;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
+import br.com.braille.xml.scorepartwise.part.measure.Attributes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,13 +29,13 @@ class ScoreTest {
     }
 
     @Test
-    @DisplayName("Verifica título")
+    @DisplayName("Teste 1: Verifica título")
     void validaTitulo() {
         assertEquals("Asa branca", scorePartwise.getCredits().getFirst().getCreditWords());
     }
 
     @Test
-    @DisplayName("Verifica leitura dos compassos")
+    @DisplayName("Teste 2: Verifica leitura dos compassos")
     public void validaCompassos() {
         List<Measure> measures = scorePartwise.getParts().getFirst().getMeasures();
 
@@ -48,8 +49,17 @@ class ScoreTest {
     }
 
     @Test
-    @DisplayName("Verifica atribuição de divisões")
+    @DisplayName("Teste 3: Verifica atribuição de divisões")
     public void validaAtributosPrimeiroCompasso() {
+        Attributes attributes = scorePartwise.getParts().getFirst()
+                .getMeasures().getFirst()
+                .getAttributes();
 
+        assertEquals(2, attributes.getDivisions());
+        assertEquals(0, attributes.getKey().getFifths());
+        assertEquals(2, attributes.getTime().getBeats());
+        assertEquals(4, attributes.getTime().getBeatType());
+        assertEquals("G", attributes.getClef().getSign());
+        assertEquals(2, attributes.getClef().getLine());
     }
 }
