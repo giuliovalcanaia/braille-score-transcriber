@@ -13,6 +13,7 @@ public class Part{
     @XmlAttribute
     private String id;
 
+    @XmlElement(name = "measure")
     private List<Measure> measures = new ArrayList<>();
 
     public String getId() {
