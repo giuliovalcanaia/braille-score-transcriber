@@ -16,13 +16,16 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Attributes {
 
-    @XmlElement
+    @XmlElement(name = "divisions")
     private Integer divisions;
 
+    @XmlElement(name = "key")
     private Key key;
 
+    @XmlElement(name = "time")
     private Time time;
 
+    @XmlElement(name = "clef")
     private List<Clef> clefs = new ArrayList<>();
 
     public Integer getDivisions() {
