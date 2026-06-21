@@ -1,5 +1,6 @@
 package br.com.braille.xml.scorepartwise.part.measure;
 
+import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.Root;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,13 +16,13 @@ public class Harmony {
     private Root root;
 
     @XmlElement(name = "kind")
-    private String kind;
+    private Kind kind;
 
     public Root getRoot() {
         return root;
     }
 
-    public String getKind() {
+    public Kind getKind() {
         return kind;
     }
 }
