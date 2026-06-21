@@ -15,7 +15,10 @@ import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
+import br.com.braille.xml.scorepartwise.part.measure.attributes.Clef;
+import br.com.braille.xml.scorepartwise.part.measure.attributes.Time;
 import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
+import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -93,14 +96,14 @@ public class ScoreTest {
         assertEquals(1, n2.getDuration());
         assertEquals(NoteType.EIGHTH, n2.getType());
         assertEquals(Step.G, n2.getPitch().getStep());
-        assertEquals(4, n2.getPitch().getOctave());
+        assertEquals(Octave.FOURTH, n2.getPitch().getOctave());
 
         Note n3 = notes.get(2);
         assertFalse(n3.isRest());
         assertEquals(1, n3.getDuration());
         assertEquals(NoteType.EIGHTH, n3.getType());
         assertEquals(Step.A, n3.getPitch().getStep());
-        assertEquals(4, n3.getPitch().getOctave());
+        assertEquals(Octave.FOURTH, n3.getPitch().getOctave());
     }
 
     @Test
@@ -120,14 +123,14 @@ public class ScoreTest {
         assertEquals(2, n1.getDuration());
         assertEquals(NoteType.QUARTER, n1.getType());
         assertEquals(Step.B, n1.getPitch().getStep());
-        assertEquals(4, n1.getPitch().getOctave());
+        assertEquals(Octave.FOURTH, n1.getPitch().getOctave());
 
         Note n2 = notes.get(1);
         assertFalse(n2.isRest());
         assertEquals(2, n2.getDuration());
         assertEquals(NoteType.QUARTER, n2.getType());
         assertEquals(Step.D, n2.getPitch().getStep());
-        assertEquals(5, n2.getPitch().getOctave());
+        assertEquals(Octave.FIFTH, n2.getPitch().getOctave());
     }
 
     @Test
@@ -188,21 +191,21 @@ public class ScoreTest {
         assertEquals(2, n1.getDuration());
         assertEquals(NoteType.QUARTER, n1.getType());
         assertEquals(Step.G, n1.getPitch().getStep());
-        assertEquals(4, n1.getPitch().getOctave());
+        assertEquals(Octave.FOURTH, n1.getPitch().getOctave());
 
         Note n2 = notes.get(1);
         assertFalse(n2.isRest());
         assertEquals(1, n2.getDuration());
         assertEquals(NoteType.EIGHTH, n2.getType());
         assertEquals(Step.F, n2.getPitch().getStep());
-        assertEquals(5, n2.getPitch().getOctave());
+        assertEquals(Octave.FIFTH, n2.getPitch().getOctave());
 
         Note n3 = notes.get(2);
         assertFalse(n3.isRest());
         assertEquals(1, n3.getDuration());
         assertEquals(NoteType.EIGHTH, n3.getType());
         assertEquals(Step.D, n3.getPitch().getStep());
-        assertEquals(5, n3.getPitch().getOctave());
+        assertEquals(Octave.FIFTH, n3.getPitch().getOctave());
     }
 
     @Test
@@ -233,5 +236,53 @@ public class ScoreTest {
         String titulo = scorePartwise.getCredits().get(0).getCreditWords();
 
         assertEquals("⠨⠁⠎⠁⠀⠃⠗⠁⠝⠉⠁", TranscritorTextoBraille.toBraille(titulo));
+    }
+
+    @Test
+    @DisplayName("Teste 11: Verifica transcrição do compasso para Braille (2/4)")
+    public void validaTranscricaoTimeSignatureBraille() throws CompilationException, TranslationException, DisplayException {
+        Time time = scorePartwise.getParts().get(0).getMeasures().get(0).getAttributes().getTime();
+
+        assertEquals("⠼⠃⠲", time.toBraille());
+        assertEquals("2/4", time.toString());
+    }
+
+    @Test
+    @DisplayName("Teste 12: Verifica clave da partitura (sol) em Unicode e Braille")
+    public void validaClaveSol() {
+        Clef clef = scorePartwise.getParts().get(0).getMeasures().get(0).getAttributes().getClef();
+
+        assertEquals(Sign.G, clef.getSign());
+        assertEquals("𝄞", clef.getSign().toString());
+        assertEquals("⠜⠌⠇", clef.getSign().toBraille());
+    }
+
+    @Test
+    @DisplayName("Teste 13: Verifica enum Octave (FIRST a SEVENTH)")
+    public void validaOctave() {
+        assertEquals(7, Octave.values().length);
+        assertEquals(Octave.FIRST, Octave.valueOf("FIRST"));
+        assertEquals(Octave.SECOND, Octave.valueOf("SECOND"));
+        assertEquals(Octave.THIRD, Octave.valueOf("THIRD"));
+        assertEquals(Octave.FOURTH, Octave.valueOf("FOURTH"));
+        assertEquals(Octave.FIFTH, Octave.valueOf("FIFTH"));
+        assertEquals(Octave.SIXTH, Octave.valueOf("SIXTH"));
+        assertEquals(Octave.SEVENTH, Octave.valueOf("SEVENTH"));
+
+        assertEquals("1", Octave.FIRST.toString());
+        assertEquals("2", Octave.SECOND.toString());
+        assertEquals("3", Octave.THIRD.toString());
+        assertEquals("4", Octave.FOURTH.toString());
+        assertEquals("5", Octave.FIFTH.toString());
+        assertEquals("6", Octave.SIXTH.toString());
+        assertEquals("7", Octave.SEVENTH.toString());
+
+        assertEquals("⠈", Octave.FIRST.toBraille());
+        assertEquals("⠘", Octave.SECOND.toBraille());
+        assertEquals("⠸", Octave.THIRD.toBraille());
+        assertEquals("⠐", Octave.FOURTH.toBraille());
+        assertEquals("⠨", Octave.FIFTH.toBraille());
+        assertEquals("⠰", Octave.SIXTH.toBraille());
+        assertEquals("⠠", Octave.SEVENTH.toBraille());
     }
 }
