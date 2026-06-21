@@ -1,5 +1,7 @@
 package br.com.braille.xml.scorepartwise.part.measure.barline;
 
+import br.com.braille.xml.scorepartwise.part.measure.barline.ending.EndingType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,13 +14,13 @@ public class Ending {
     private String number;
 
     @XmlAttribute(name = "type")
-    private String type;
+    private EndingType type;
 
     public String getNumber() {
         return number;
     }
 
-    public String getType() {
+    public EndingType getType() {
         return type;
     }
 
