@@ -10,6 +10,7 @@ import br.com.braille.xml.scorepartwise.part.measure.Note;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
 import br.com.braille.xml.scorepartwise.part.measure.note.Type;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
+import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,7 +64,7 @@ class ScoreTest {
         assertEquals(0, attributes.getKey().getFifths());
         assertEquals(2, attributes.getTime().getBeats());
         assertEquals(4, attributes.getTime().getBeatType());
-        assertEquals("G", attributes.getClef().getSign());
+        assertEquals(Sign.G, attributes.getClef().getSign());
         assertEquals(2, attributes.getClef().getLine());
     }
 
