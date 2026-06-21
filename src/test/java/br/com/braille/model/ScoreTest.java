@@ -8,6 +8,7 @@ import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
 import br.com.braille.xml.scorepartwise.part.measure.barline.Ending;
+import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -100,7 +101,7 @@ class ScoreTest {
         Measure measure2 = scorePartwise.getParts().get(0).getMeasures().get(1);
 
         Harmony harmony = measure2.getHarmonies().get(0);
-        assertEquals("G", harmony.getRoot().getRootStep());
+        assertEquals(RootStep.G, harmony.getRoot().getRootStep());
         assertEquals("major", harmony.getKind());
 
         List<Note> notes = measure2.getNotes();
@@ -168,7 +169,7 @@ class ScoreTest {
         assertEquals("discontinue", direita.getEnding().getType());
 
         Harmony harmony = compasso17.getHarmonies().get(0);
-        assertEquals("G", harmony.getRoot().getRootStep());
+        assertEquals(RootStep.G, harmony.getRoot().getRootStep());
         assertEquals("major", harmony.getKind());
 
         List<Note> notes = compasso17.getNotes();
