@@ -16,7 +16,7 @@ public class Measure{
     private String number;
 
     @XmlElement(name = "attributes")
-    private List<Attributes> attributes = new ArrayList<>();
+    private Attributes attributes;
 
     @XmlElement(name = "note")
     private List<Note> notes = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Measure{
         return number;
     }
 
-    public List<Attributes> getAttributes() {
+    public Attributes getAttributes() {
         return attributes;
     }
 
