@@ -27,7 +27,7 @@ class ScoreTest {
 
     @BeforeEach
     public void setUp() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
-        this.testFilePath = "/home/giulio/braille-xml/src/test/resources/Asa-Branca.musicxml";
+        this.testFilePath = "src/test/resources/Asa-Branca.musicxml";
         desempacotador = new Desempacotador(testFilePath);
         scorePartwise = desempacotador.carregarPartitura();
     }

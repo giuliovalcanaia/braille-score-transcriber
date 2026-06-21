@@ -15,7 +15,7 @@ import java.io.FileReader;
 public class Main {
     public static void main(String[] args) throws JAXBException, SAXException, ParserConfigurationException, FileNotFoundException {
         // Define arquivo
-        File arquivoXml = new File("/home/giulio/braille-xml/src/main/java/br/com/braille/exemplo/Asa-Branca.musicxml");
+        File arquivoXml = new File("src/main/java/br/com/braille/exemplo/Asa-Branca.musicxml");
 
         // Classe alvo
         JAXBContext contexto = JAXBContext.newInstance(ScorePartwise.class);
