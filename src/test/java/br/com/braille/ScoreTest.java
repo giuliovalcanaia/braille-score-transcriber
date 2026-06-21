@@ -1,4 +1,4 @@
-package br.com.braille.model;
+package br.com.braille;
 
 import br.com.braille.service.Desempacotador;
 import br.com.braille.xml.ScorePartwise;
@@ -27,7 +27,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ScoreTest {
+public class ScoreTest {
     private String testFilePath;
     private Desempacotador desempacotador;
     private ScorePartwise scorePartwise;
