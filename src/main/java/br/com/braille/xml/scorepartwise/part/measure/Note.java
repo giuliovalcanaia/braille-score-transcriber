@@ -14,6 +14,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Note {
 
+    @XmlElement(name = "pitch")
     private Pitch pitch;
 
     @XmlElement(name = "rest")
