@@ -1,5 +1,7 @@
 package br.com.braille.xml.scorepartwise.part.measure.barline;
 
+import br.com.braille.xml.scorepartwise.part.measure.barline.repeat.Direction;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,12 +10,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class Repeat {
 
     @XmlAttribute(name = "direction")
-    private String direction;
+    private Direction direction;
 
     @XmlAttribute(name = "times")
     private Integer times;
 
-    public String getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 

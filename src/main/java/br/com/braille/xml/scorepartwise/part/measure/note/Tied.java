@@ -1,16 +1,18 @@
 package br.com.braille.xml.scorepartwise.part.measure.note;
 
+import br.com.braille.xml.scorepartwise.part.measure.note.tie.TiedType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Tie {
+public class Tied {
 
     @XmlAttribute(name = "type")
-    private String type;
+    private TiedType tiedType;
 
-    public String getType() {
-        return type;
+    public TiedType getTiedType() {
+        return tiedType;
     }
 }

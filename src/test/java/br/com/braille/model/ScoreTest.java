@@ -7,7 +7,14 @@ import br.com.braille.xml.scorepartwise.part.measure.Attributes;
 import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
-import br.com.braille.xml.scorepartwise.part.measure.barline.Ending;
+import br.com.braille.xml.scorepartwise.part.measure.barline.Location;
+import br.com.braille.xml.scorepartwise.part.measure.barline.repeat.Direction;
+import br.com.braille.xml.scorepartwise.part.measure.barline.ending.EndingType;
+import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
+import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
+import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
+import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
+import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,7 +68,7 @@ class ScoreTest {
         assertEquals(0, attributes.getKey().getFifths());
         assertEquals(2, attributes.getTime().getBeats());
         assertEquals(4, attributes.getTime().getBeatType());
-        assertEquals("G", attributes.getClef().getSign());
+        assertEquals(Sign.G, attributes.getClef().getSign());
         assertEquals(2, attributes.getClef().getLine());
     }
 
@@ -76,20 +83,20 @@ class ScoreTest {
         assertTrue(n1.isRest());
         assertNull(n1.getPitch());
         assertEquals(2, n1.getDuration());
-        assertEquals("quarter", n1.getType());
+        assertEquals(NoteType.QUARTER, n1.getType());
 
         Note n2 = notes.get(1);
         assertFalse(n2.isRest());
         assertEquals(1, n2.getDuration());
-        assertEquals("eighth", n2.getType());
-        assertEquals("G", n2.getPitch().getStep());
+        assertEquals(NoteType.EIGHTH, n2.getType());
+        assertEquals(Step.G, n2.getPitch().getStep());
         assertEquals(4, n2.getPitch().getOctave());
 
         Note n3 = notes.get(2);
         assertFalse(n3.isRest());
         assertEquals(1, n3.getDuration());
-        assertEquals("eighth", n3.getType());
-        assertEquals("A", n3.getPitch().getStep());
+        assertEquals(NoteType.EIGHTH, n3.getType());
+        assertEquals(Step.A, n3.getPitch().getStep());
         assertEquals(4, n3.getPitch().getOctave());
     }
 
@@ -99,8 +106,8 @@ class ScoreTest {
         Measure measure2 = scorePartwise.getParts().get(0).getMeasures().get(1);
 
         Harmony harmony = measure2.getHarmonies().get(0);
-        assertEquals("G", harmony.getRoot().getRootStep());
-        assertEquals("major", harmony.getKind());
+        assertEquals(RootStep.G, harmony.getRoot().getRootStep());
+        assertEquals(Kind.MAJOR, harmony.getKind());
 
         List<Note> notes = measure2.getNotes();
         assertEquals(2, notes.size());
@@ -108,15 +115,15 @@ class ScoreTest {
         Note n1 = notes.get(0);
         assertFalse(n1.isRest());
         assertEquals(2, n1.getDuration());
-        assertEquals("quarter", n1.getType());
-        assertEquals("B", n1.getPitch().getStep());
+        assertEquals(NoteType.QUARTER, n1.getType());
+        assertEquals(Step.B, n1.getPitch().getStep());
         assertEquals(4, n1.getPitch().getOctave());
 
         Note n2 = notes.get(1);
         assertFalse(n2.isRest());
         assertEquals(2, n2.getDuration());
-        assertEquals("quarter", n2.getType());
-        assertEquals("D", n2.getPitch().getStep());
+        assertEquals(NoteType.QUARTER, n2.getType());
+        assertEquals(Step.D, n2.getPitch().getStep());
         assertEquals(5, n2.getPitch().getOctave());
     }
 
@@ -126,8 +133,8 @@ class ScoreTest {
         Measure compasso9 = scorePartwise.getParts().get(0).getMeasures().get(8);
 
         Barline barline = compasso9.getBarlines().get(0);
-        assertEquals("left", barline.getLocation());
-        assertEquals("forward", barline.getRepeat().getDirection());
+        assertEquals(Location.LEFT, barline.getLocation());
+        assertEquals(Direction.FORWARD, barline.getRepeat().getDirection());
     }
 
     @Test
@@ -138,15 +145,15 @@ class ScoreTest {
         assertEquals(2, compasso16.getBarlines().size());
 
         Barline esquerda = compasso16.getBarlines().get(0);
-        assertEquals("left", esquerda.getLocation());
+        assertEquals(Location.LEFT, esquerda.getLocation());
         assertEquals("1", esquerda.getEnding().getNumber());
-        assertEquals("start", esquerda.getEnding().getType());
+        assertEquals(EndingType.START, esquerda.getEnding().getType());
 
         Barline direita = compasso16.getBarlines().get(1);
-        assertEquals("right", direita.getLocation());
+        assertEquals(Location.RIGHT, direita.getLocation());
         assertEquals("1", direita.getEnding().getNumber());
-        assertEquals("stop", direita.getEnding().getType());
-        assertEquals("backward", direita.getRepeat().getDirection());
+        assertEquals(EndingType.STOP, direita.getEnding().getType());
+        assertEquals(Direction.BACKWARD, direita.getRepeat().getDirection());
     }
 
     @Test
@@ -157,18 +164,18 @@ class ScoreTest {
         assertEquals(2, compasso17.getBarlines().size());
 
         Barline esquerda = compasso17.getBarlines().get(0);
-        assertEquals("left", esquerda.getLocation());
+        assertEquals(Location.LEFT, esquerda.getLocation());
         assertEquals("2", esquerda.getEnding().getNumber());
-        assertEquals("start", esquerda.getEnding().getType());
+        assertEquals(EndingType.START, esquerda.getEnding().getType());
 
         Barline direita = compasso17.getBarlines().get(1);
-        assertEquals("right", direita.getLocation());
+        assertEquals(Location.RIGHT, direita.getLocation());
         assertEquals("2", direita.getEnding().getNumber());
-        assertEquals("discontinue", direita.getEnding().getType());
+        assertEquals(EndingType.DISCONTINUE, direita.getEnding().getType());
 
         Harmony harmony = compasso17.getHarmonies().get(0);
-        assertEquals("G", harmony.getRoot().getRootStep());
-        assertEquals("major", harmony.getKind());
+        assertEquals(RootStep.G, harmony.getRoot().getRootStep());
+        assertEquals(Kind.MAJOR, harmony.getKind());
 
         List<Note> notes = compasso17.getNotes();
         assertEquals(3, notes.size());
@@ -176,22 +183,22 @@ class ScoreTest {
         Note n1 = notes.get(0);
         assertFalse(n1.isRest());
         assertEquals(2, n1.getDuration());
-        assertEquals("quarter", n1.getType());
-        assertEquals("G", n1.getPitch().getStep());
+        assertEquals(NoteType.QUARTER, n1.getType());
+        assertEquals(Step.G, n1.getPitch().getStep());
         assertEquals(4, n1.getPitch().getOctave());
 
         Note n2 = notes.get(1);
         assertFalse(n2.isRest());
         assertEquals(1, n2.getDuration());
-        assertEquals("eighth", n2.getType());
-        assertEquals("F", n2.getPitch().getStep());
+        assertEquals(NoteType.EIGHTH, n2.getType());
+        assertEquals(Step.F, n2.getPitch().getStep());
         assertEquals(5, n2.getPitch().getOctave());
 
         Note n3 = notes.get(2);
         assertFalse(n3.isRest());
         assertEquals(1, n3.getDuration());
-        assertEquals("eighth", n3.getType());
-        assertEquals("D", n3.getPitch().getStep());
+        assertEquals(NoteType.EIGHTH, n3.getType());
+        assertEquals(Step.D, n3.getPitch().getStep());
         assertEquals(5, n3.getPitch().getOctave());
     }
 
@@ -205,7 +212,7 @@ class ScoreTest {
         assertTrue(compasso26.getHarmonies().isEmpty());
 
         Barline barline = compasso26.getBarlines().get(0);
-        assertEquals("right", barline.getLocation());
+        assertEquals(Location.RIGHT, barline.getLocation());
         assertNull(barline.getEnding());
         assertNull(barline.getRepeat());
 
@@ -214,6 +221,6 @@ class ScoreTest {
         Note note = notes.get(0);
         assertTrue(note.isRest());
         assertEquals(4, note.getDuration());
-        assertEquals("half", note.getType());
+        assertEquals(NoteType.HALF, note.getType());
     }
 }
