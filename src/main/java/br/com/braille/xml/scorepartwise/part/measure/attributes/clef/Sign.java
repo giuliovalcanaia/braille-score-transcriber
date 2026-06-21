@@ -28,5 +28,24 @@ public enum Sign {
 
     // Deprecated as of MusicXML 4.0. Use the clef element's print-object attribute instead. When the none sign is used, notes should be displayed as if in treble clef.
     @XmlEnumValue("none")
-    NONE
+    NONE;
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case G -> "𝄞";
+            case F -> "𝄢";
+            case C -> "𝄡";
+            default -> name();
+        };
+    }
+
+    public String toBraille() {
+        return switch (this) {
+            case G -> "⠜⠌⠇";
+            case F -> "⠜⠼⠇";
+            case C -> "⠜⠬⠇";
+            default -> name();
+        };
+    }
 }
