@@ -8,6 +8,7 @@ import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
 import br.com.braille.xml.scorepartwise.part.measure.barline.Location;
+import br.com.braille.xml.scorepartwise.part.measure.barline.repeat.Direction;
 import br.com.braille.xml.scorepartwise.part.measure.barline.ending.EndingType;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
@@ -133,7 +134,7 @@ class ScoreTest {
 
         Barline barline = compasso9.getBarlines().get(0);
         assertEquals(Location.LEFT, barline.getLocation());
-        assertEquals("forward", barline.getRepeat().getDirection());
+        assertEquals(Direction.FORWARD, barline.getRepeat().getDirection());
     }
 
     @Test
@@ -152,7 +153,7 @@ class ScoreTest {
         assertEquals(Location.RIGHT, direita.getLocation());
         assertEquals("1", direita.getEnding().getNumber());
         assertEquals(EndingType.STOP, direita.getEnding().getType());
-        assertEquals("backward", direita.getRepeat().getDirection());
+        assertEquals(Direction.BACKWARD, direita.getRepeat().getDirection());
     }
 
     @Test
