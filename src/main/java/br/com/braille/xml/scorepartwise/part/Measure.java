@@ -26,7 +26,7 @@ public class Measure{
     private List<Harmony> harmonies = new ArrayList<>();
 
     @XmlElement(name = "barline")
-    private Barline barline;
+    private List<Barline> barlines = new ArrayList<>();
 
     public String getNumber() {
         return number;
@@ -44,7 +44,7 @@ public class Measure{
         return harmonies;
     }
 
-    public Barline getBarline() {
-        return barline;
+    public List<Barline> getBarlines() {
+        return barlines;
     }
 }
