@@ -4,6 +4,7 @@ import br.com.braille.service.Desempacotador;
 import br.com.braille.service.TranscritorTextoBraille;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
+import br.com.braille.xml.scorepartwise.part.measure.Note;
 import org.liblouis.CompilationException;
 import org.liblouis.DisplayException;
 import org.liblouis.TranslationException;
@@ -40,8 +41,18 @@ public class Aplication {
         // Clave
         System.out.print(compassos.get(0).getAttributes().getClef().getSign().toBraille() + " ");
 
-        // Primeiro compasso
-
+        // Compassos
+        for (Measure compasso : compassos) {
+            for (Note nota : compasso.getNotes()) {
+                String braille = nota.toBraille();
+                System.out.print(braille);
+            }
+            System.out.print(" ");
+            if (compasso.isPrint()) {
+                System.out.println();
+            }
+        }
+        System.out.println();
 
         System.out.println("=====================================================");
 
