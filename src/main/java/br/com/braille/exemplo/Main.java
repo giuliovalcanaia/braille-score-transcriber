@@ -34,6 +34,6 @@ public class Main {
 
         // Aqui acontece a desserialização
         ScorePartwise scorePartwise = (ScorePartwise) unmarshaller.unmarshal(source);
-        System.out.println(scorePartwise.getCredits().getFirst().getCreditWords());
+        System.out.println(scorePartwise.getCredits().get(0).getCreditWords());
     }
 }
