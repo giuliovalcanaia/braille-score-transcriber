@@ -21,6 +21,7 @@ public class Measure{
     @XmlElement(name = "note")
     private List<Note> notes = new ArrayList<>();
 
+    @XmlElement(name = "harmony")
     private List<Harmony> harmonies = new ArrayList<>();
 
     public String getNumber() {
