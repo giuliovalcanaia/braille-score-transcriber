@@ -4,6 +4,7 @@ import br.com.braille.service.Desempacotador;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
 import br.com.braille.xml.scorepartwise.part.measure.Attributes;
+import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
 import org.junit.jupiter.api.BeforeEach;
@@ -118,5 +119,12 @@ class ScoreTest {
         assertEquals(5, n2.getPitch().getOctave());
     }
 
+    @Test
+    @DisplayName("Teste 6: Verifica barline do nono compasso")
+    public void validaBarlineNonoCompasso() {
+        Measure compasso9 = scorePartwise.getParts().getFirst().getMeasures().get(8);
 
+        assertEquals("left", compasso9.getBarline().getLocation());
+        assertEquals("forward", compasso9.getBarline().getRepeat().getDirection());
+    }
 }
