@@ -4,6 +4,7 @@ import br.com.braille.service.Desempacotador;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
 import br.com.braille.xml.scorepartwise.part.measure.Attributes;
+import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -90,5 +91,32 @@ class ScoreTest {
         assertEquals(4, n3.getPitch().getOctave());
     }
 
-    
+    @Test
+    @DisplayName("Teste 5: Verifica notas e harmonia do segundo compasso")
+    public void validaNotasHarmoniaSegundoCompasso() {
+        Measure measure2 = scorePartwise.getParts().getFirst().getMeasures().get(1);
+
+        Harmony harmony = measure2.getHarmonies().getFirst();
+        assertEquals("G", harmony.getRoot().getRootStep());
+        assertEquals("major", harmony.getKind());
+
+        List<Note> notes = measure2.getNotes();
+        assertEquals(2, notes.size());
+
+        Note n1 = notes.get(0);
+        assertFalse(n1.isRest());
+        assertEquals(2, n1.getDuration());
+        assertEquals("quarter", n1.getType());
+        assertEquals("B", n1.getPitch().getStep());
+        assertEquals(4, n1.getPitch().getOctave());
+
+        Note n2 = notes.get(1);
+        assertFalse(n2.isRest());
+        assertEquals(2, n2.getDuration());
+        assertEquals("quarter", n2.getType());
+        assertEquals("D", n2.getPitch().getStep());
+        assertEquals(5, n2.getPitch().getOctave());
+    }
+
+
 }
