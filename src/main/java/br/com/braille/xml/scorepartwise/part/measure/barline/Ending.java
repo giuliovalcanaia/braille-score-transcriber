@@ -14,9 +14,6 @@ public class Ending {
     @XmlAttribute(name = "type")
     private String type;
 
-    @XmlValue
-    private String text;
-
     public String getNumber() {
         return number;
     }
@@ -25,7 +22,4 @@ public class Ending {
         return type;
     }
 
-    public String getText() {
-        return text;
-    }
 }
