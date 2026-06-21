@@ -1,6 +1,7 @@
 package br.com.braille.xml.scorepartwise.part;
 
 import br.com.braille.xml.scorepartwise.part.measure.Attributes;
+import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
 
@@ -24,6 +25,9 @@ public class Measure{
     @XmlElement(name = "harmony")
     private List<Harmony> harmonies = new ArrayList<>();
 
+    @XmlElement(name = "barline")
+    private List<Barline> barlines = new ArrayList<>();
+
     public String getNumber() {
         return number;
     }
@@ -38,5 +42,9 @@ public class Measure{
 
     public List<Harmony> getHarmonies() {
         return harmonies;
+    }
+
+    public List<Barline> getBarlines() {
+        return barlines;
     }
 }
