@@ -27,7 +27,7 @@ public class Note {
     @XmlElement(name = "type")
     private NoteType noteType;
 
-    @XmlElement(name = "tie")
+    @XmlElement(name = "tied")
     private List<Tied> tieds = new ArrayList<>();
 
     public Pitch getPitch() {
@@ -46,7 +46,7 @@ public class Note {
         return noteType;
     }
 
-    public List<Tied> getTies() {
+    public List<Tied> getTieds() {
         return tieds;
     }
 }
