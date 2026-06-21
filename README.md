@@ -86,5 +86,6 @@ De momento estes são todos os elementos mapeados do formato musicXML.
 ```
 
 # Referências:
-É possível encontrar toda a documentação do formato musicmxl e seus respectivos elementos aqui:
-https://www.w3.org/2021/06/musicxml40/musicxml-reference/element-tree/
+É possível encontrar toda a documentação do formato musicmxl e seus respectivos elementos aqui: https://www.w3.org/2021/06/musicxml40/musicxml-reference/element-tree/
+
+Para a transcrição braille foi usado o seguinte documento: https://media.rnib.org.uk/documents/New_International_Manual.pdf
