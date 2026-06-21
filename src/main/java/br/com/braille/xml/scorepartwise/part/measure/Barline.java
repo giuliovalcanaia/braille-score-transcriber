@@ -1,6 +1,7 @@
 package br.com.braille.xml.scorepartwise.part.measure;
 
 import br.com.braille.xml.scorepartwise.part.measure.barline.Ending;
+import br.com.braille.xml.scorepartwise.part.measure.barline.Location;
 import br.com.braille.xml.scorepartwise.part.measure.barline.Repeat;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Barline {
 
     @XmlAttribute(name = "location")
-    private String location;
+    private Location location;
 
     @XmlElement(name = "ending")
     private Ending ending;
@@ -22,7 +23,7 @@ public class Barline {
     @XmlElement(name = "repeat")
     private Repeat repeat;
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
