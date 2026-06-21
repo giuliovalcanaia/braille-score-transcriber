@@ -47,16 +47,9 @@ class ScoreTest {
         }
     }
 
-//    @Test
-//    @DisplayName("Verifica atribuição de divisões")
-//    public void testExtractDivisions() {
-//        Score score = parser.parse(testFilePath);
-//        List<Measure> measures = score.getMeasures();
-//
-//        assertNotNull(measures);
-//
-//        for (int i = 0; i < 25; i++) {
-//            assertEquals(2, measures.get(i).getDivisions());
-//        }
-//    }
+    @Test
+    @DisplayName("Verifica atribuição de divisões")
+    public void validaAtributosPrimeiroCompasso() {
+
+    }
 }
