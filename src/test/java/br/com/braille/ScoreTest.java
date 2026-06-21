@@ -18,6 +18,9 @@ import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.liblouis.Translator;
+import org.liblouis.TranslationResult;
+import org.liblouis.DisplayTable.StandardDisplayTables;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -222,5 +225,16 @@ public class ScoreTest {
         assertTrue(note.isRest());
         assertEquals(4, note.getDuration());
         assertEquals(NoteType.HALF, note.getType());
+    }
+
+    @Test
+    @DisplayName("Teste 10: Verifica transcrição do título para Braille")
+    public void validaTranscricaoTituloBraille() throws org.liblouis.CompilationException, org.liblouis.TranslationException, org.liblouis.DisplayException {
+        String titulo = scorePartwise.getCredits().get(0).getCreditWords();
+
+        Translator translator = new Translator("pt-pt-g1.utb");
+        TranslationResult resultado = translator.translate(titulo, null, null, null, StandardDisplayTables.UNICODE);
+
+        assertEquals("⠨⠁⠎⠁⠀⠃⠗⠁⠝⠉⠁", resultado.getBraille());
     }
 }
