@@ -1,27 +1,24 @@
 package br.com.braille.exemplo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 // Define que esta classe será a tag principal (raiz) do XML
 @XmlRootElement(name = "score-partwise")
-public class Partitura{
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ScorePartwise {
 
-    private String credit;
+    @XmlElement(name = "credit")
+    private List<Credit> credits;
 
-    public Partitura() {}
-
-    public Partitura(String credit) {
-        this.credit = credit;
+    public List<Credit> getCredits() {
+        return credits;
     }
 
-    @XmlElement
-    public String getCredit() {
-        return credit;
-    }
-
-    @XmlElement
-    public void setCredit(String credit) {
-        this.credit = credit;
+    public void setCredits(List<Credit> credits) {
+        this.credits = credits;
     }
 }
