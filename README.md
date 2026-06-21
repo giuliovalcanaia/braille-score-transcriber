@@ -52,9 +52,9 @@ public class Usuario {
 Exemplo:
 1. Classe Java com as anotações JAXB:
 ```java
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 // Define que esta classe será a tag principal (raiz) do XML
 @XmlRootElement(name = "produto")
@@ -96,8 +96,8 @@ public class Produto {
 
 2. Código para serializar
 ```java
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Marshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import java.io.StringWriter;
 
 public class MarshalExemplo {
@@ -128,8 +128,8 @@ public class MarshalExemplo {
 
 3. Código para desserializar
 ```java
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Unmarshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 
 public class UnmarshalExemplo {
