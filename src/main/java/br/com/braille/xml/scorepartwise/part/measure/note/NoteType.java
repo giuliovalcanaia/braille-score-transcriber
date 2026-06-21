@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlEnum
-public enum Type {
+public enum NoteType {
 
     // semiquintifusa
     @XmlEnumValue("1024th")
