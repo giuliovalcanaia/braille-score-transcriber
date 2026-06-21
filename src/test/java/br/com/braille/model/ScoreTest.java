@@ -35,13 +35,13 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 1: Verifica título")
     void validaTitulo() {
-        assertEquals("Asa branca", scorePartwise.getCredits().getFirst().getCreditWords());
+        assertEquals("Asa branca", scorePartwise.getCredits().get(0).getCreditWords());
     }
 
     @Test
     @DisplayName("Teste 2: Verifica leitura dos compassos")
     public void validaCompassos() {
-        List<Measure> measures = scorePartwise.getParts().getFirst().getMeasures();
+        List<Measure> measures = scorePartwise.getParts().get(0).getMeasures();
 
         // Verifica se a scorePartwise possui 26 compassos
         assertEquals(26, measures.size());
@@ -55,7 +55,7 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 3: Verifica atribuição de divisões")
     public void validaAtributosPrimeiroCompasso() {
-        Attributes attributes = scorePartwise.getParts().getFirst().getMeasures().getFirst().getAttributes();
+        Attributes attributes = scorePartwise.getParts().get(0).getMeasures().get(0).getAttributes();
 
         assertEquals(2, attributes.getDivisions());
         assertEquals(0, attributes.getKey().getFifths());
@@ -68,7 +68,7 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 4: Verifica notas do primeiro compasso")
     public void validaNotasPrimeiroCompasso() {
-        List<Note> notes = scorePartwise.getParts().getFirst().getMeasures().getFirst().getNotes();
+        List<Note> notes = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes();
 
         assertEquals(3, notes.size());
 
@@ -96,9 +96,9 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 5: Verifica notas e harmonia do segundo compasso")
     public void validaNotasHarmoniaSegundoCompasso() {
-        Measure measure2 = scorePartwise.getParts().getFirst().getMeasures().get(1);
+        Measure measure2 = scorePartwise.getParts().get(0).getMeasures().get(1);
 
-        Harmony harmony = measure2.getHarmonies().getFirst();
+        Harmony harmony = measure2.getHarmonies().get(0);
         assertEquals("G", harmony.getRoot().getRootStep());
         assertEquals("major", harmony.getKind());
 
@@ -123,9 +123,9 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 6: Verifica barline do nono compasso")
     public void validaBarlineNonoCompasso() {
-        Measure compasso9 = scorePartwise.getParts().getFirst().getMeasures().get(8);
+        Measure compasso9 = scorePartwise.getParts().get(0).getMeasures().get(8);
 
-        Barline barline = compasso9.getBarlines().getFirst();
+        Barline barline = compasso9.getBarlines().get(0);
         assertEquals("left", barline.getLocation());
         assertEquals("forward", barline.getRepeat().getDirection());
     }
@@ -133,7 +133,7 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 7: Verifica barlines do décimo sexto compasso")
     public void validaBarlinesDecimoSextoCompasso() {
-        Measure compasso16 = scorePartwise.getParts().getFirst().getMeasures().get(15);
+        Measure compasso16 = scorePartwise.getParts().get(0).getMeasures().get(15);
 
         assertEquals(2, compasso16.getBarlines().size());
 
@@ -152,7 +152,7 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 8: Verifica compasso 17")
     public void validaCompassoDezessete() {
-        Measure compasso17 = scorePartwise.getParts().getFirst().getMeasures().get(16);
+        Measure compasso17 = scorePartwise.getParts().get(0).getMeasures().get(16);
 
         assertEquals(2, compasso17.getBarlines().size());
 
@@ -166,7 +166,7 @@ class ScoreTest {
         assertEquals("2", direita.getEnding().getNumber());
         assertEquals("discontinue", direita.getEnding().getType());
 
-        Harmony harmony = compasso17.getHarmonies().getFirst();
+        Harmony harmony = compasso17.getHarmonies().get(0);
         assertEquals("G", harmony.getRoot().getRootStep());
         assertEquals("major", harmony.getKind());
 
@@ -198,20 +198,20 @@ class ScoreTest {
     @Test
     @DisplayName("Teste 9: Verifica compasso 26")
     public void validaCompassoVinteSeis() {
-        Measure compasso26 = scorePartwise.getParts().getFirst().getMeasures().get(25);
+        Measure compasso26 = scorePartwise.getParts().get(0).getMeasures().get(25);
 
         assertNull(compasso26.getAttributes());
 
         assertTrue(compasso26.getHarmonies().isEmpty());
 
-        Barline barline = compasso26.getBarlines().getFirst();
+        Barline barline = compasso26.getBarlines().get(0);
         assertEquals("right", barline.getLocation());
         assertNull(barline.getEnding());
         assertNull(barline.getRepeat());
 
         List<Note> notes = compasso26.getNotes();
         assertEquals(1, notes.size());
-        Note note = notes.getFirst();
+        Note note = notes.get(0);
         assertTrue(note.isRest());
         assertEquals(4, note.getDuration());
         assertEquals("half", note.getType());
