@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Harmony {
 
+    @XmlElement(name = "root")
     private Root root;
 
     @XmlElement(name = "kind")
