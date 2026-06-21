@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
 
 @XmlRootElement(name = "attributes")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,7 +24,7 @@ public class Attributes {
     private Time time;
 
     @XmlElement(name = "clef")
-    private List<Clef> clefs = new ArrayList<>();
+    private Clef clef;
 
     public Integer getDivisions() {
         return divisions;
@@ -40,7 +38,7 @@ public class Attributes {
         return time;
     }
 
-    public List<Clef> getClefs() {
-        return clefs;
+    public Clef getClef() {
+        return clef;
     }
 }
