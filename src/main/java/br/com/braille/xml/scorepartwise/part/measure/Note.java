@@ -2,6 +2,7 @@ package br.com.braille.xml.scorepartwise.part.measure;
 
 import br.com.braille.xml.scorepartwise.part.measure.note.Pitch;
 import br.com.braille.xml.scorepartwise.part.measure.note.Tie;
+import br.com.braille.xml.scorepartwise.part.measure.note.Type;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,7 +25,7 @@ public class Note {
     private Integer duration;
 
     @XmlElement(name = "type")
-    private String type;
+    private Type type;
 
     @XmlElement(name = "tie")
     private List<Tie> ties = new ArrayList<>();
@@ -41,7 +42,7 @@ public class Note {
         return duration;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
