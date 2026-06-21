@@ -1,7 +1,7 @@
 package br.com.braille.xml.scorepartwise.part.measure;
 
 import br.com.braille.xml.scorepartwise.part.measure.note.Pitch;
-import br.com.braille.xml.scorepartwise.part.measure.note.Tie;
+import br.com.braille.xml.scorepartwise.part.measure.note.Tied;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,7 +28,7 @@ public class Note {
     private NoteType noteType;
 
     @XmlElement(name = "tie")
-    private List<Tie> ties = new ArrayList<>();
+    private List<Tied> tieds = new ArrayList<>();
 
     public Pitch getPitch() {
         return pitch;
@@ -46,7 +46,7 @@ public class Note {
         return noteType;
     }
 
-    public List<Tie> getTies() {
-        return ties;
+    public List<Tied> getTies() {
+        return tieds;
     }
 }
