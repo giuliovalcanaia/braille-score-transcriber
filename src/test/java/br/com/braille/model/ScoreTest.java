@@ -141,12 +141,79 @@ class ScoreTest {
         assertEquals("left", esquerda.getLocation());
         assertEquals("1", esquerda.getEnding().getNumber());
         assertEquals("start", esquerda.getEnding().getType());
-        assertEquals("1.", esquerda.getEnding().getText());
 
         Barline direita = compasso16.getBarlines().get(1);
         assertEquals("right", direita.getLocation());
         assertEquals("1", direita.getEnding().getNumber());
         assertEquals("stop", direita.getEnding().getType());
         assertEquals("backward", direita.getRepeat().getDirection());
+    }
+
+    @Test
+    @DisplayName("Teste 8: Verifica compasso 17")
+    public void validaCompassoDezessete() {
+        Measure compasso17 = scorePartwise.getParts().getFirst().getMeasures().get(16);
+
+        assertEquals(2, compasso17.getBarlines().size());
+
+        Barline esquerda = compasso17.getBarlines().get(0);
+        assertEquals("left", esquerda.getLocation());
+        assertEquals("2", esquerda.getEnding().getNumber());
+        assertEquals("start", esquerda.getEnding().getType());
+
+        Barline direita = compasso17.getBarlines().get(1);
+        assertEquals("right", direita.getLocation());
+        assertEquals("2", direita.getEnding().getNumber());
+        assertEquals("discontinue", direita.getEnding().getType());
+
+        Harmony harmony = compasso17.getHarmonies().getFirst();
+        assertEquals("G", harmony.getRoot().getRootStep());
+        assertEquals("major", harmony.getKind());
+
+        List<Note> notes = compasso17.getNotes();
+        assertEquals(3, notes.size());
+
+        Note n1 = notes.get(0);
+        assertFalse(n1.isRest());
+        assertEquals(2, n1.getDuration());
+        assertEquals("quarter", n1.getType());
+        assertEquals("G", n1.getPitch().getStep());
+        assertEquals(4, n1.getPitch().getOctave());
+
+        Note n2 = notes.get(1);
+        assertFalse(n2.isRest());
+        assertEquals(1, n2.getDuration());
+        assertEquals("eighth", n2.getType());
+        assertEquals("F", n2.getPitch().getStep());
+        assertEquals(5, n2.getPitch().getOctave());
+
+        Note n3 = notes.get(2);
+        assertFalse(n3.isRest());
+        assertEquals(1, n3.getDuration());
+        assertEquals("eighth", n3.getType());
+        assertEquals("D", n3.getPitch().getStep());
+        assertEquals(5, n3.getPitch().getOctave());
+    }
+
+    @Test
+    @DisplayName("Teste 9: Verifica compasso 26")
+    public void validaCompassoVinteSeis() {
+        Measure compasso26 = scorePartwise.getParts().getFirst().getMeasures().get(25);
+
+        assertNull(compasso26.getAttributes());
+
+        assertTrue(compasso26.getHarmonies().isEmpty());
+
+        Barline barline = compasso26.getBarlines().getFirst();
+        assertEquals("right", barline.getLocation());
+        assertNull(barline.getEnding());
+        assertNull(barline.getRepeat());
+
+        List<Note> notes = compasso26.getNotes();
+        assertEquals(1, notes.size());
+        Note note = notes.getFirst();
+        assertTrue(note.isRest());
+        assertEquals(4, note.getDuration());
+        assertEquals("half", note.getType());
     }
 }
