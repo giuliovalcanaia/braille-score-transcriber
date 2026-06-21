@@ -9,6 +9,7 @@ import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
 import br.com.braille.xml.scorepartwise.part.measure.barline.Location;
 import br.com.braille.xml.scorepartwise.part.measure.barline.ending.EndingType;
+import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
@@ -105,7 +106,7 @@ class ScoreTest {
 
         Harmony harmony = measure2.getHarmonies().get(0);
         assertEquals(RootStep.G, harmony.getRoot().getRootStep());
-        assertEquals("major", harmony.getKind());
+        assertEquals(Kind.MAJOR, harmony.getKind());
 
         List<Note> notes = measure2.getNotes();
         assertEquals(2, notes.size());
@@ -173,7 +174,7 @@ class ScoreTest {
 
         Harmony harmony = compasso17.getHarmonies().get(0);
         assertEquals(RootStep.G, harmony.getRoot().getRootStep());
-        assertEquals("major", harmony.getKind());
+        assertEquals(Kind.MAJOR, harmony.getKind());
 
         List<Note> notes = compasso17.getNotes();
         assertEquals(3, notes.size());
