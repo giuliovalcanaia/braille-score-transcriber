@@ -7,6 +7,7 @@ import br.com.braille.xml.scorepartwise.part.measure.Attributes;
 import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
+import br.com.braille.xml.scorepartwise.part.measure.barline.Location;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
 import br.com.braille.xml.scorepartwise.part.measure.note.Type;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
@@ -129,7 +130,7 @@ class ScoreTest {
         Measure compasso9 = scorePartwise.getParts().get(0).getMeasures().get(8);
 
         Barline barline = compasso9.getBarlines().get(0);
-        assertEquals("left", barline.getLocation());
+        assertEquals(Location.LEFT, barline.getLocation());
         assertEquals("forward", barline.getRepeat().getDirection());
     }
 
@@ -141,12 +142,12 @@ class ScoreTest {
         assertEquals(2, compasso16.getBarlines().size());
 
         Barline esquerda = compasso16.getBarlines().get(0);
-        assertEquals("left", esquerda.getLocation());
+        assertEquals(Location.LEFT, esquerda.getLocation());
         assertEquals("1", esquerda.getEnding().getNumber());
         assertEquals("start", esquerda.getEnding().getType());
 
         Barline direita = compasso16.getBarlines().get(1);
-        assertEquals("right", direita.getLocation());
+        assertEquals(Location.RIGHT, direita.getLocation());
         assertEquals("1", direita.getEnding().getNumber());
         assertEquals("stop", direita.getEnding().getType());
         assertEquals("backward", direita.getRepeat().getDirection());
@@ -160,12 +161,12 @@ class ScoreTest {
         assertEquals(2, compasso17.getBarlines().size());
 
         Barline esquerda = compasso17.getBarlines().get(0);
-        assertEquals("left", esquerda.getLocation());
+        assertEquals(Location.LEFT, esquerda.getLocation());
         assertEquals("2", esquerda.getEnding().getNumber());
         assertEquals("start", esquerda.getEnding().getType());
 
         Barline direita = compasso17.getBarlines().get(1);
-        assertEquals("right", direita.getLocation());
+        assertEquals(Location.RIGHT, direita.getLocation());
         assertEquals("2", direita.getEnding().getNumber());
         assertEquals("discontinue", direita.getEnding().getType());
 
@@ -208,7 +209,7 @@ class ScoreTest {
         assertTrue(compasso26.getHarmonies().isEmpty());
 
         Barline barline = compasso26.getBarlines().get(0);
-        assertEquals("right", barline.getLocation());
+        assertEquals(Location.RIGHT, barline.getLocation());
         assertNull(barline.getEnding());
         assertNull(barline.getRepeat());
 
