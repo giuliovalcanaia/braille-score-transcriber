@@ -5,6 +5,7 @@ import br.com.braille.service.TranscritorTextoBraille;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
+import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
 import org.liblouis.CompilationException;
 import org.liblouis.DisplayException;
 import org.liblouis.TranslationException;
@@ -42,8 +43,16 @@ public class Aplication {
         System.out.print(compassos.get(0).getAttributes().getClef().getSign().toBraille() + " ");
 
         // Compassos
+        Octave previousOctave = null;
         for (Measure compasso : compassos) {
             for (Note nota : compasso.getNotes()) {
+                if (!nota.isRest() && nota.getPitch() != null && nota.getPitch().getOctave() != null) {
+                    Octave currentOctave = nota.getPitch().getOctave();
+                    if (!currentOctave.equals(previousOctave)) {
+                        System.out.print(currentOctave.toBraille());
+                        previousOctave = currentOctave;
+                    }
+                }
                 String braille = nota.toBraille();
                 System.out.print(braille);
             }
