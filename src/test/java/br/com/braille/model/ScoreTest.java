@@ -7,6 +7,7 @@ import br.com.braille.xml.scorepartwise.part.measure.Attributes;
 import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
+import br.com.braille.xml.scorepartwise.part.measure.barline.Ending;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -124,7 +125,28 @@ class ScoreTest {
     public void validaBarlineNonoCompasso() {
         Measure compasso9 = scorePartwise.getParts().getFirst().getMeasures().get(8);
 
-        assertEquals("left", compasso9.getBarline().getLocation());
-        assertEquals("forward", compasso9.getBarline().getRepeat().getDirection());
+        Barline barline = compasso9.getBarlines().getFirst();
+        assertEquals("left", barline.getLocation());
+        assertEquals("forward", barline.getRepeat().getDirection());
+    }
+
+    @Test
+    @DisplayName("Teste 7: Verifica barlines do décimo sexto compasso")
+    public void validaBarlinesDecimoSextoCompasso() {
+        Measure compasso16 = scorePartwise.getParts().getFirst().getMeasures().get(15);
+
+        assertEquals(2, compasso16.getBarlines().size());
+
+        Barline esquerda = compasso16.getBarlines().get(0);
+        assertEquals("left", esquerda.getLocation());
+        assertEquals("1", esquerda.getEnding().getNumber());
+        assertEquals("start", esquerda.getEnding().getType());
+        assertEquals("1.", esquerda.getEnding().getText());
+
+        Barline direita = compasso16.getBarlines().get(1);
+        assertEquals("right", direita.getLocation());
+        assertEquals("1", direita.getEnding().getNumber());
+        assertEquals("stop", direita.getEnding().getType());
+        assertEquals("backward", direita.getRepeat().getDirection());
     }
 }
