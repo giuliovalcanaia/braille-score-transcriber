@@ -43,7 +43,7 @@ public class Note {
         return duration;
     }
 
-    public NoteType getType() {
+    public NoteType getNoteType() {
         return noteType;
     }
 
@@ -52,15 +52,15 @@ public class Note {
     }
 
     public String toBraille() {
-        if (!isRest()) {
-            return TranscritorParaBraille.pausasParaBraille(getType());
+        if (isRest()) {
+            return TranscritorParaBraille.pausasParaBraille(getNoteType());
         } else {
-            return TranscritorParaBraille.notasParaBraille(getType(), getPitch().getStep());
+            return TranscritorParaBraille.notasParaBraille(getNoteType(), getPitch().getStep());
         }
     }
 
     @Override
     public String toString() {
-        return
+        return getPitch().getStep().toString() + getPitch().getOctave().toString() + " " + getNoteType().toString();
     }
 }
