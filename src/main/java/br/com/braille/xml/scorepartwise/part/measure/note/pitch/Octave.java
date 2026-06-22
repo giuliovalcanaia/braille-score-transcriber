@@ -40,6 +40,9 @@ public enum Octave {
         return String.valueOf(descricao);
     }
 
+    public int getDescricao() {
+        return descricao;
+    }
 
     public String toBraille() {
         return descricaoBraille;
