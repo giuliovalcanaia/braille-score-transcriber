@@ -36,7 +36,7 @@ public class Aplication {
 //        System.out.println("=====================================================");
 
         // Título
-        System.out.println(TranscritorTextoBraille.toBraille(titulo));
+        System.out.println(TranscritorTextoBraille.textoParaBraille(titulo));
 
         // Fórmula de compasso
         System.out.println(compassos.get(0).getAttributes().getTime().toBraille());
@@ -70,12 +70,12 @@ public class Aplication {
 
 //        System.out.println("=====================================================");
 //        System.out.println("Partitura transcrita em braille com explicação");
-//        System.out.println("Título: " + TranscritorTextoBraille.toBraille(titulo));
+//        System.out.println("Título: " + TranscritorTextoBraille.textoParaBraille(titulo));
 //        System.out.println("Título: " + titulo);
 //
 //        for (int i = 0; i < titulo.length(); i++) {
 //            char caractere = titulo.charAt(i);
-//            String braille = TranscritorTextoBraille.toBraille(String.valueOf(caractere));
+//            String braille = TranscritorTextoBraille.textoParaBraille(String.valueOf(caractere));
 //            System.out.println(caractere + " = " + braille);
 //        }
 //
