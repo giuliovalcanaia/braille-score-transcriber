@@ -28,6 +28,9 @@ public class Measure{
     @XmlElement(name = "barline")
     private List<Barline> barlines = new ArrayList<>();
 
+    @XmlElement(name = "print")
+    private Object print;
+
     public String getNumber() {
         return number;
     }
@@ -46,5 +49,9 @@ public class Measure{
 
     public List<Barline> getBarlines() {
         return barlines;
+    }
+
+    public boolean isPrint() {
+        return print != null;
     }
 }

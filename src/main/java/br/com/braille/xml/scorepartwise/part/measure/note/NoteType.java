@@ -8,57 +8,68 @@ public enum NoteType {
 
     // semiquintifusa
     @XmlEnumValue("1024th")
-    ONE_THOUSAND_TWENTY_FOURTH,
+    ONE_THOUSAND_TWENTY_FOURTH("semiquintifusa"),
 
     // quintifusa
     @XmlEnumValue("512th")
-    FIVE_HUNDRED_TWELFTH,
+    FIVE_HUNDRED_TWELFTH("quintifusa"),
 
     // semiquartifusa
     @XmlEnumValue("256th")
-    TWO_HUNDRED_FIFTY_SIXTH,
+    TWO_HUNDRED_FIFTY_SIXTH("semiquartifusa"),
 
     // quartifusa
     @XmlEnumValue("128th")
-    ONE_HUNDRED_TWENTY_EIGHTH,
+    ONE_HUNDRED_TWENTY_EIGHTH("quartifusa"),
 
     // semifusa
     @XmlEnumValue("64th")
-    SIXTY_FOURTH,
+    SIXTY_FOURTH("semifusa"),
 
     // fusa
     @XmlEnumValue("32nd")
-    THIRTY_SECOND,
+    THIRTY_SECOND("fusa"),
 
     // semicolcheia
     @XmlEnumValue("16th")
-    SIXTEENTH,
+    SIXTEENTH("semicolcheia"),
 
     // colcheia
     @XmlEnumValue("eighth")
-    EIGHTH,
+    EIGHTH("colcheia"),
 
     // semínima
     @XmlEnumValue("quarter")
-    QUARTER,
+    QUARTER("semínima"),
 
     // mínima
     @XmlEnumValue("half")
-    HALF,
+    HALF("mínima"),
 
     // semibreve
     @XmlEnumValue("whole")
-    WHOLE,
+    WHOLE("semibreve"),
 
     // breve
     @XmlEnumValue("breve")
-    BREVE,
+    BREVE("breve"),
 
     // longa
     @XmlEnumValue("long")
-    LONG,
+    LONG("longa"),
 
     // máxima
     @XmlEnumValue("maxima")
-    MAXIMA
+    MAXIMA("máxima");
+
+    private String descricao;
+
+    NoteType(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

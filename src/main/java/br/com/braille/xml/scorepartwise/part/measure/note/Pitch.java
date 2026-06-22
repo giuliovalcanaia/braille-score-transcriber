@@ -1,5 +1,6 @@
 package br.com.braille.xml.scorepartwise.part.measure.note;
 
+import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,7 +16,7 @@ public class Pitch {
     private Step step;
 
     @XmlElement(name = "octave")
-    private Integer octave;
+    private Octave octave;
 
     @XmlElement(name = "alter")
     private Integer alter;
@@ -24,7 +25,7 @@ public class Pitch {
         return step;
     }
 
-    public Integer getOctave() {
+    public Octave getOctave() {
         return octave;
     }
 

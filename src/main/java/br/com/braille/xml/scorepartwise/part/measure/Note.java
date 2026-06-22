@@ -1,5 +1,6 @@
 package br.com.braille.xml.scorepartwise.part.measure;
 
+import br.com.braille.service.TranscritorParaBraille;
 import br.com.braille.xml.scorepartwise.part.measure.note.Pitch;
 import br.com.braille.xml.scorepartwise.part.measure.note.Tied;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
@@ -42,11 +43,28 @@ public class Note {
         return duration;
     }
 
-    public NoteType getType() {
+    public NoteType getNoteType() {
         return noteType;
     }
 
     public List<Tied> getTieds() {
         return tieds;
+    }
+
+    public String toBraille() {
+        if (isRest()) {
+            return TranscritorParaBraille.pausasParaBraille(getNoteType());
+        } else {
+            return TranscritorParaBraille.notasParaBraille(getNoteType(), getPitch().getStep());
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (isRest()) {
+            return "Pausa " + getNoteType().toString();
+        } else {
+            return getPitch().getStep().toString() + getPitch().getOctave().toString() + " " + getNoteType().toString();
+        }
     }
 }
