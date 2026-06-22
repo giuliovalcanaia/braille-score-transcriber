@@ -25,5 +25,5 @@ public enum Step {
     F,
 
     @XmlEnumValue("G")
-    G
+    G;
 }
