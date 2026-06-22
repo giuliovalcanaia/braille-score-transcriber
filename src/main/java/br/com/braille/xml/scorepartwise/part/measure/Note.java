@@ -61,6 +61,10 @@ public class Note {
 
     @Override
     public String toString() {
-        return getPitch().getStep().toString() + getPitch().getOctave().toString() + " " + getNoteType().toString();
+        if (isRest()) {
+            return "Pausa " + getNoteType().toString();
+        } else {
+            return getPitch().getStep().toString() + getPitch().getOctave().toString() + " " + getNoteType().toString();
+        }
     }
 }
