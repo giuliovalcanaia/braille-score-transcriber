@@ -1,7 +1,7 @@
 package br.com.braille.app;
 
 import br.com.braille.service.Desempacotador;
-import br.com.braille.service.TranscritorTextoBraille;
+import br.com.braille.service.TranscritorParaBraille;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
@@ -36,7 +36,7 @@ public class Aplication {
 //        System.out.println("=====================================================");
 
         // Título
-        System.out.println(TranscritorTextoBraille.textoParaBraille(titulo));
+        System.out.println(TranscritorParaBraille.textoParaBraille(titulo));
 
         // Fórmula de compasso
         System.out.println(compassos.get(0).getAttributes().getTime().toBraille());
