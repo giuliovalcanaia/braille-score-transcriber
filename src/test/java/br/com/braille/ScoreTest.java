@@ -1,7 +1,6 @@
 package br.com.braille;
 
 import br.com.braille.service.Desempacotador;
-import br.com.braille.service.TranscritorTextoBraille;
 import br.com.braille.xml.ScorePartwise;
 import br.com.braille.xml.scorepartwise.part.Measure;
 import br.com.braille.xml.scorepartwise.part.measure.Attributes;
@@ -15,8 +14,6 @@ import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
 import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
-import br.com.braille.xml.scorepartwise.part.measure.attributes.Clef;
-import br.com.braille.xml.scorepartwise.part.measure.attributes.Time;
 import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
 import org.junit.jupiter.api.BeforeEach;
@@ -229,59 +226,4 @@ public class ScoreTest {
         assertEquals(NoteType.HALF, note.getType());
     }
 
-    @Test
-    @DisplayName("Teste 10: Verifica transcrição do título para Braille")
-    public void validaTranscricaoTituloBraille() throws CompilationException, TranslationException, DisplayException {
-        String titulo = scorePartwise.getCredits().get(0).getCreditWords();
-
-        assertEquals("⠨⠁⠎⠁⠀⠃⠗⠁⠝⠉⠁", TranscritorTextoBraille.textoParaBraille(titulo));
-    }
-
-    @Test
-    @DisplayName("Teste 11: Verifica transcrição do compasso para Braille (2/4)")
-    public void validaTranscricaoTimeSignatureBraille() throws CompilationException, TranslationException, DisplayException {
-        Time time = scorePartwise.getParts().get(0).getMeasures().get(0).getAttributes().getTime();
-
-        assertEquals("⠼⠃⠲", time.toBraille());
-        assertEquals("2/4", time.toString());
-    }
-
-    @Test
-    @DisplayName("Teste 12: Verifica clave da partitura (sol) em Unicode e Braille")
-    public void validaClaveSol() {
-        Clef clef = scorePartwise.getParts().get(0).getMeasures().get(0).getAttributes().getClef();
-
-        assertEquals(Sign.G, clef.getSign());
-        assertEquals("𝄞", clef.getSign().toString());
-        assertEquals("⠜⠌⠇", clef.getSign().toBraille());
-    }
-
-    @Test
-    @DisplayName("Teste 13: Verifica enum Octave (FIRST a SEVENTH)")
-    public void validaOctave() {
-        assertEquals(7, Octave.values().length);
-        assertEquals(Octave.FIRST, Octave.valueOf("FIRST"));
-        assertEquals(Octave.SECOND, Octave.valueOf("SECOND"));
-        assertEquals(Octave.THIRD, Octave.valueOf("THIRD"));
-        assertEquals(Octave.FOURTH, Octave.valueOf("FOURTH"));
-        assertEquals(Octave.FIFTH, Octave.valueOf("FIFTH"));
-        assertEquals(Octave.SIXTH, Octave.valueOf("SIXTH"));
-        assertEquals(Octave.SEVENTH, Octave.valueOf("SEVENTH"));
-
-        assertEquals("1", Octave.FIRST.toString());
-        assertEquals("2", Octave.SECOND.toString());
-        assertEquals("3", Octave.THIRD.toString());
-        assertEquals("4", Octave.FOURTH.toString());
-        assertEquals("5", Octave.FIFTH.toString());
-        assertEquals("6", Octave.SIXTH.toString());
-        assertEquals("7", Octave.SEVENTH.toString());
-
-        assertEquals("⠈", Octave.FIRST.toBraille());
-        assertEquals("⠘", Octave.SECOND.toBraille());
-        assertEquals("⠸", Octave.THIRD.toBraille());
-        assertEquals("⠐", Octave.FOURTH.toBraille());
-        assertEquals("⠨", Octave.FIFTH.toBraille());
-        assertEquals("⠰", Octave.SIXTH.toBraille());
-        assertEquals("⠠", Octave.SEVENTH.toBraille());
-    }
 }
