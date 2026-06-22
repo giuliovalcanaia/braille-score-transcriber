@@ -1,19 +1,16 @@
 package br.com.braille.xml.scorepartwise.part.measure;
 
-import br.com.braille.service.TranscritorTextoBraille;
+import br.com.braille.service.TranscritorParaBraille;
 import br.com.braille.xml.scorepartwise.part.measure.note.Pitch;
 import br.com.braille.xml.scorepartwise.part.measure.note.Tied;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @XmlRootElement(name = "note")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -56,9 +53,14 @@ public class Note {
 
     public String toBraille() {
         if (!isRest()) {
-            return TranscritorTextoBraille.pausasParaBraille(getType());
+            return TranscritorParaBraille.pausasParaBraille(getType());
         } else {
-            return TranscritorTextoBraille.notasParaBraille(getType(), getPitch().getStep());
+            return TranscritorParaBraille.notasParaBraille(getType(), getPitch().getStep());
         }
+    }
+
+    @Override
+    public String toString() {
+        return
     }
 }
