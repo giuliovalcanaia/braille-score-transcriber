@@ -7,23 +7,34 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum Step {
 
     @XmlEnumValue("A")
-    A,
+    A("A"),
 
     @XmlEnumValue("B")
-    B,
+    B("B"),
 
     @XmlEnumValue("C")
-    C,
+    C("C"),
 
     @XmlEnumValue("D")
-    D,
+    D("D"),
 
     @XmlEnumValue("E")
-    E,
+    E("E"),
 
     @XmlEnumValue("F")
-    F,
+    F("F"),
 
     @XmlEnumValue("G")
-    G;
+    G("G");
+
+    private String descricao;
+
+    Step(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }
