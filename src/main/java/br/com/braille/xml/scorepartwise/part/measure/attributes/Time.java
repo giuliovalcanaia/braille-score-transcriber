@@ -32,7 +32,7 @@ public class Time {
         if (beats == null || beatType == null) {
             return "";
         }
-        String numerador = TranscritorTextoBraille.toBraille(beats.toString()).substring(1);
+        String numerador = TranscritorTextoBraille.textoParaBraille(beats.toString()).substring(1);
         String denominador = switch (beatType) {
             case 1 -> "⠁";
             case 2 -> "⠃";
@@ -41,7 +41,7 @@ public class Time {
             case 16 -> "⠶";
             case 32 -> "⠾";
             case 64 -> "⠿";
-            default -> TranscritorTextoBraille.toBraille(String.valueOf(beatType)).substring(1);
+            default -> TranscritorTextoBraille.textoParaBraille(String.valueOf(beatType)).substring(1);
         };
         return "⠼" + numerador + denominador;
     }
