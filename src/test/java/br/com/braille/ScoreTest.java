@@ -23,7 +23,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.liblouis.*;
-import org.liblouis.DisplayTable.StandardDisplayTables;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -235,7 +234,7 @@ public class ScoreTest {
     public void validaTranscricaoTituloBraille() throws CompilationException, TranslationException, DisplayException {
         String titulo = scorePartwise.getCredits().get(0).getCreditWords();
 
-        assertEquals("⠨⠁⠎⠁⠀⠃⠗⠁⠝⠉⠁", TranscritorTextoBraille.toBraille(titulo));
+        assertEquals("⠨⠁⠎⠁⠀⠃⠗⠁⠝⠉⠁", TranscritorTextoBraille.textoParaBraille(titulo));
     }
 
     @Test
