@@ -18,40 +18,39 @@ public class TranscritorParaBraille {
         tabelaNotasBraille = new HashMap<>();
         tabelaPausasBraille = new HashMap<>();
 
-        // WHOLE
+        // WHOLE semibreve
         tabelaNotasBraille.put(NoteType.WHOLE, Map.of(
                 Step.C, "⠽", Step.D, "⠵", Step.E, "⠯", Step.F, "⠿",
                 Step.G, "⠷", Step.A, "⠮", Step.B, "⠾"
         ));
-        // Duplica a tabela para 16th
+        // Duplica a tabela para 16th semicolcheia
         tabelaNotasBraille.put(NoteType.SIXTEENTH, tabelaNotasBraille.get(NoteType.WHOLE));
 
-        // HALF
+        // HALF Mínima
         tabelaNotasBraille.put(NoteType.HALF, Map.of(
                 Step.C, "⠝", Step.D, "⠕", Step.E, "⠏", Step.F, "⠟",
                 Step.G, "⠗", Step.A, "⠎", Step.B, "⠞"
         ));
-        // Duplica a entrada para 32th
+        // Duplica a entrada para 32th fusa
         tabelaNotasBraille.put(NoteType.THIRTY_SECOND, tabelaNotasBraille.get(NoteType.HALF));
 
-        // QUARTER
+        // QUARTER semínima
         tabelaNotasBraille.put(NoteType.QUARTER, Map.of(
                 Step.C, "⠹", Step.D, "⠱", Step.E, "⠫", Step.F, "⠻",
                 Step.G, "⠳", Step.A, "⠪", Step.B, "⠺"
         ));
-        // Duplica a entrada para 64th
+        // Duplica a entrada para 64th semifusa
         tabelaNotasBraille.put(NoteType.SIXTY_FOURTH, tabelaNotasBraille.get(NoteType.QUARTER));
 
-        // EIGHTH
+        // EIGHTH colcheia
         tabelaNotasBraille.put(NoteType.EIGHTH, Map.of(
                 Step.C, "⠙", Step.D, "⠑", Step.E, "⠋", Step.F, "⠛",
                 Step.G, "⠓", Step.A, "⠊", Step.B, "⠚"
         ));
-        // Duplica a entrada para 128th
+        // Duplica a entrada para 128th quartifusa
         tabelaNotasBraille.put(NoteType.ONE_HUNDRED_TWENTY_EIGHTH, tabelaNotasBraille.get(NoteType.EIGHTH));
 
         // Pausas
-        // WHOLE
         tabelaPausasBraille.put(NoteType.WHOLE, "⠍");
         tabelaPausasBraille.put(NoteType.HALF, "⠥");
         tabelaPausasBraille.put(NoteType.QUARTER, "⠧");
