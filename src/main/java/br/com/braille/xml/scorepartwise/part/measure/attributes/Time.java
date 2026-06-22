@@ -1,6 +1,6 @@
 package br.com.braille.xml.scorepartwise.part.measure.attributes;
 
-import br.com.braille.service.TranscritorTextoBraille;
+import br.com.braille.service.TranscritorParaBraille;
 import org.liblouis.CompilationException;
 import org.liblouis.DisplayException;
 import org.liblouis.TranslationException;
@@ -29,10 +29,8 @@ public class Time {
     }
 
     public String toBraille() throws CompilationException, TranslationException, DisplayException {
-        if (beats == null || beatType == null) {
-            return "";
-        }
-        String numerador = TranscritorTextoBraille.textoParaBraille(beats.toString()).substring(1);
+        // Remove o indicador numérico L invertido
+        String numerador = TranscritorParaBraille.textoParaBraille(beats.toString()).substring(1);
         String denominador = switch (beatType) {
             case 1 -> "⠁";
             case 2 -> "⠃";
@@ -41,7 +39,7 @@ public class Time {
             case 16 -> "⠶";
             case 32 -> "⠾";
             case 64 -> "⠿";
-            default -> TranscritorTextoBraille.textoParaBraille(String.valueOf(beatType)).substring(1);
+            default -> throw new IllegalStateException("Unexpected value: " + beatType);
         };
         return "⠼" + numerador + denominador;
     }
