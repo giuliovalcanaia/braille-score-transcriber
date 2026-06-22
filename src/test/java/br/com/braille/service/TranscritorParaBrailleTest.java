@@ -1,6 +1,7 @@
 package br.com.braille.service;
 
 import br.com.braille.xml.ScorePartwise;
+import br.com.braille.xml.scorepartwise.part.measure.Note;
 import br.com.braille.xml.scorepartwise.part.measure.attributes.Clef;
 import br.com.braille.xml.scorepartwise.part.measure.attributes.Time;
 import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
@@ -21,7 +22,8 @@ import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TranscritorParaBrailleTest {
+public class TranscritorParaBrailleTest extends ContextoMusical{
+//    private Note ultimaNotaReal;
     private String testFilePath;
     private Desempacotador desempacotador;
     private ScorePartwise scorePartwise;
@@ -98,7 +100,7 @@ public class TranscritorParaBrailleTest {
 
     @Test
     @DisplayName("Teste 6: Verifica transcrição de notas para braille")
-    public void validaNotas() {
+    public void validaNotasBraille() {
         // Wholes, 16ths (Semibreves / Semicolcheias)
         assertEquals("⠽", TranscritorParaBraille.notasParaBraille(NoteType.WHOLE, Step.C));
         assertEquals("⠵", TranscritorParaBraille.notasParaBraille(NoteType.WHOLE, Step.D));
@@ -164,4 +166,66 @@ public class TranscritorParaBrailleTest {
         assertEquals("⠚", TranscritorParaBraille.notasParaBraille(NoteType.ONE_HUNDRED_TWENTY_EIGHTH, Step.B));
     }
 
+    @Test
+    @DisplayName("Teste 7: Verifica transcrição de notas para string")
+    public void validaNotasString() {
+        Note n1  = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes().get(0);
+        Note n2  = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes().get(1);
+        Note n3  = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes().get(2);
+        Note n4  = scorePartwise.getParts().get(0).getMeasures().get(1).getNotes().get(0);
+        Note n5  = scorePartwise.getParts().get(0).getMeasures().get(1).getNotes().get(1);
+        Note n6  = scorePartwise.getParts().get(0).getMeasures().get(2).getNotes().get(0);
+        Note n7  = scorePartwise.getParts().get(0).getMeasures().get(2).getNotes().get(1);
+        Note n8  = scorePartwise.getParts().get(0).getMeasures().get(3).getNotes().get(0);
+        Note n9  = scorePartwise.getParts().get(0).getMeasures().get(3).getNotes().get(1);
+        Note n10 = scorePartwise.getParts().get(0).getMeasures().get(4).getNotes().get(0);
+
+        assertEquals("Pausa semínima", n1.toString());
+        assertEquals("G4 colcheia",    n2.toString());
+        assertEquals("A4 colcheia",    n3.toString());
+        assertEquals("B4 semínima",    n4.toString());
+        assertEquals("D5 semínima",    n5.toString());
+        assertEquals("D5 semínima",    n6.toString());
+        assertEquals("B4 semínima",    n7.toString());
+        assertEquals("C5 semínima",    n8.toString());
+        assertEquals("C5 semínima",    n9.toString());
+        assertEquals("Pausa semínima", n10.toString());
+
+        assertEquals("⠧", n1.toBraille());
+        assertEquals("⠓", n2.toBraille());
+        assertEquals("⠊", n3.toBraille());
+        assertEquals("⠺", n4.toBraille());
+        assertEquals("⠱", n5.toBraille());
+        assertEquals("⠱", n6.toBraille());
+        assertEquals("⠺", n7.toBraille());
+        assertEquals("⠹", n8.toBraille());
+        assertEquals("⠹", n9.toBraille());
+        assertEquals("⠧", n10.toBraille());
+    }
+
+    @Test
+    @DisplayName("Teste 8: Verifica quando uma nota precisa do prefixo de oitava")
+    public void validaPrecisaOitava() {
+        Note n1 = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes().get(0);
+        Note n2 = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes().get(1);
+        Note n3 = scorePartwise.getParts().get(0).getMeasures().get(0).getNotes().get(2);
+        Note n4 = scorePartwise.getParts().get(0).getMeasures().get(1).getNotes().get(0);
+        Note n5 = scorePartwise.getParts().get(0).getMeasures().get(1).getNotes().get(1);
+        Note n6 = scorePartwise.getParts().get(0).getMeasures().get(2).getNotes().get(0);
+        Note n7 = scorePartwise.getParts().get(0).getMeasures().get(2).getNotes().get(1);
+        Note n8 = scorePartwise.getParts().get(0).getMeasures().get(3).getNotes().get(0);
+        Note n9 = scorePartwise.getParts().get(0).getMeasures().get(3).getNotes().get(1);
+        Note n10 = scorePartwise.getParts().get(0).getMeasures().get(4).getNotes().get(0);
+
+        assertFalse(TranscritorParaBraille.precisaOitava(n1));
+        assertTrue(TranscritorParaBraille.precisaOitava(n2));
+        assertFalse(TranscritorParaBraille.precisaOitava(n3));
+        assertFalse(TranscritorParaBraille.precisaOitava(n4));
+        assertFalse(TranscritorParaBraille.precisaOitava(n5));
+        assertFalse(TranscritorParaBraille.precisaOitava(n6));
+        assertFalse(TranscritorParaBraille.precisaOitava(n7));
+        assertFalse(TranscritorParaBraille.precisaOitava(n8));
+        assertFalse(TranscritorParaBraille.precisaOitava(n9));
+        assertFalse(TranscritorParaBraille.precisaOitava(n10));
+    }
 }
