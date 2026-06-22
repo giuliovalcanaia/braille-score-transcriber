@@ -8,7 +8,7 @@ import org.liblouis.DisplayTable.StandardDisplayTables;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TranscritorTextoBraille{
+public class TranscritorParaBraille {
     private static final String TABELA = "pt-pt-g1.utb";
     private static final Map<NoteType, Map<Step, String>> tabelaNotasBraille;
     private static final Map<NoteType, String> tabelaPausasBraille;
