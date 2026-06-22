@@ -4,7 +4,6 @@ import br.com.braille.xml.scorepartwise.part.measure.Attributes;
 import br.com.braille.xml.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.scorepartwise.part.measure.Harmony;
 import br.com.braille.xml.scorepartwise.part.measure.Note;
-import br.com.braille.xml.scorepartwise.part.measure.Print;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class Measure{
     private List<Barline> barlines = new ArrayList<>();
 
     @XmlElement(name = "print")
-    private Print print;
+    private Object print;
 
     public String getNumber() {
         return number;
@@ -52,11 +51,7 @@ public class Measure{
         return barlines;
     }
 
-    public Print getPrint() {
-        return print;
-    }
-
     public boolean isPrint() {
-        return print != null && print.isNewSystem();
+        return print != null;
     }
 }
