@@ -13,7 +13,7 @@ public class TranscritorTextoBrailleTest {
     @DisplayName("Teste 1: Transcrição caractere `a` para português")
     public void validaCaracteresimples() throws CompilationException, TranslationException, DisplayException {
         TranscritorTextoBraille ttb = new TranscritorTextoBraille();
-        String textoTranscrito = ttb.toBraille("a");
+        String textoTranscrito = ttb.textoParaBraille("a");
         assertEquals("⠁", textoTranscrito);
     }
 
