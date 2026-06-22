@@ -7,48 +7,41 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum Octave {
 
     @XmlEnumValue("1")
-    FIRST,
+    FIRST(1,"⠈"),
 
     @XmlEnumValue("2")
-    SECOND,
+    SECOND(2,"⠘"),
 
     @XmlEnumValue("3")
-    THIRD,
+    THIRD(3,"⠸"),
 
     @XmlEnumValue("4")
-    FOURTH,
+    FOURTH(4,"⠐"),
 
     @XmlEnumValue("5")
-    FIFTH,
+    FIFTH(5,"⠨"),
 
     @XmlEnumValue("6")
-    SIXTH,
+    SIXTH(6,"⠰"),
 
     @XmlEnumValue("7")
-    SEVENTH;
+    SEVENTH(7,"⠠");
+
+    private int descricao;
+    private String descricaoBraille;
+
+    Octave(int descricao, String descricaoBraille) {
+        this.descricao = descricao;
+        this.descricaoBraille = descricaoBraille;
+    }
 
     @Override
     public String toString() {
-        return switch (this) {
-            case FIRST -> "1";
-            case SECOND -> "2";
-            case THIRD -> "3";
-            case FOURTH -> "4";
-            case FIFTH -> "5";
-            case SIXTH -> "6";
-            case SEVENTH -> "7";
-        };
+        return String.valueOf(descricao);
     }
 
+
     public String toBraille() {
-        return switch (this) {
-            case FIRST -> "⠈";
-            case SECOND -> "⠘";
-            case THIRD -> "⠸";
-            case FOURTH -> "⠐";
-            case FIFTH -> "⠨";
-            case SIXTH -> "⠰";
-            case SEVENTH -> "⠠";
-        };
+        return descricaoBraille;
     }
 }
