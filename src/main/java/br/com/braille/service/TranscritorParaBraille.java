@@ -1,6 +1,8 @@
 package br.com.braille.service;
 
+import br.com.braille.xml.scorepartwise.part.measure.Note;
 import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
+import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
 import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
 import org.liblouis.*;
 import org.liblouis.DisplayTable.StandardDisplayTables;
@@ -8,7 +10,7 @@ import org.liblouis.DisplayTable.StandardDisplayTables;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TranscritorParaBraille {
+public class TranscritorParaBraille extends ContextoMusical{
     private static final String TABELA = "pt-pt-g1.utb";
     private static final Map<NoteType, Map<Step, String>> tabelaNotasBraille;
     private static final Map<NoteType, String> tabelaPausasBraille;
@@ -73,5 +75,37 @@ public class TranscritorParaBraille {
 
     public static String pausasParaBraille (NoteType noteType) {
         return tabelaPausasBraille.get(noteType);
+    }
+
+    public static boolean precisaOitava(Note notaAtual) {
+//        System.out.println("Nota atual " + notaAtual);
+//        System.out.println("Ultima nota " + ultimaNota);
+        if (ultimaNota == null || notaAtual.isRest()) {
+            ultimaNota = notaAtual;
+            return false;
+        }
+
+        if (ultimaNotaReal == null) {
+            ultimaNota = notaAtual;
+            ultimaNotaReal = ultimaNota;
+            return true;
+        }
+
+        ultimaNota = notaAtual;
+        ultimaNotaReal = ultimaNota;
+        int posAnterior = ((ultimaNotaReal.getPitch().getOctave().getDescricao() - 1) * 7) + ultimaNotaReal.getPitch().getStep().getReferencia();
+        int posAtual  = ((notaAtual.getPitch().getOctave().getDescricao() - 1) * 7) + notaAtual.getPitch().getStep().getReferencia();
+        int intervalo  = Math.abs(posAtual - posAnterior) + 1;
+
+        if (intervalo <= 3) {
+            ultimaNotaReal = ultimaNota;
+            return false;
+        } else if (intervalo <= 5) {
+            return notaAtual.getPitch().getOctave() != ultimaNotaReal.getPitch().getOctave();
+        } else {
+            ultimaNotaReal = ultimaNota;
+            return true;
+        }
+
     }
 }
