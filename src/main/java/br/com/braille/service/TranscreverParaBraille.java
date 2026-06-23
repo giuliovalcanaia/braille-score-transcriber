@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class TranscreverParaBraille {
     private static final String TABELA = "pt-pt-g1.utb";
+    private static final Translator TRANSLATOR;
     private static final Map<NoteType, Map<Step, String>> tabelaNotasBraille;
     private static final Map<NoteType, String> tabelaPausasBraille;
 
@@ -61,11 +62,17 @@ public class TranscreverParaBraille {
         tabelaPausasBraille.put(NoteType.THIRTY_SECOND, "⠥");
         tabelaPausasBraille.put(NoteType.SIXTY_FOURTH, "⠧");
         tabelaPausasBraille.put(NoteType.ONE_HUNDRED_TWENTY_EIGHTH, "⠭");
+
+        // Liblouis
+        try {
+            TRANSLATOR = new Translator(TABELA);
+        } catch (CompilationException e) {
+            throw new RuntimeException("Erro ao inicializar tradutor braille", e);
+        }
     }
 
-    public static String textoParaBraille(String texto) throws CompilationException, TranslationException, DisplayException {
-        Translator translator = new Translator(TABELA);
-        TranslationResult resultado = translator.translate(texto, null, null, null, StandardDisplayTables.UNICODE);
+    public static String textoParaBraille(String texto) throws TranslationException, DisplayException {
+        TranslationResult resultado = TRANSLATOR.translate(texto, null, null, null, StandardDisplayTables.UNICODE);
         return resultado.getBraille();
     }
 
