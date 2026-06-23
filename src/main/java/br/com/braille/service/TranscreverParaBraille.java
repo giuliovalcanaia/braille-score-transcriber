@@ -71,9 +71,13 @@ public class TranscreverParaBraille {
         }
     }
 
-    public static String textoParaBraille(String texto) throws TranslationException, DisplayException {
-        TranslationResult resultado = TRANSLATOR.translate(texto, null, null, null, StandardDisplayTables.UNICODE);
-        return resultado.getBraille();
+    public static String textoParaBraille(String texto) {
+        try {
+            TranslationResult resultado = TRANSLATOR.translate(texto, null, null, null, StandardDisplayTables.UNICODE);
+            return resultado.getBraille();
+        } catch (TranslationException | DisplayException e) {
+            return "[erro: " + e.getMessage() + "]";
+        }
     }
 
     public static String notasParaBraille (NoteType noteType, Step step) {
