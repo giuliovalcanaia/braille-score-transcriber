@@ -1,24 +1,28 @@
 package br.com.braille;
 
 import br.com.braille.service.Desempacotador;
-import br.com.braille.xml.ScorePartwise;
-import br.com.braille.xml.scorepartwise.part.Measure;
-import br.com.braille.xml.scorepartwise.part.measure.Attributes;
-import br.com.braille.xml.scorepartwise.part.measure.Barline;
-import br.com.braille.xml.scorepartwise.part.measure.Harmony;
-import br.com.braille.xml.scorepartwise.part.measure.Note;
-import br.com.braille.xml.scorepartwise.part.measure.barline.Location;
-import br.com.braille.xml.scorepartwise.part.measure.barline.repeat.Direction;
-import br.com.braille.xml.scorepartwise.part.measure.barline.ending.EndingType;
-import br.com.braille.xml.scorepartwise.part.measure.harmony.Kind;
-import br.com.braille.xml.scorepartwise.part.measure.harmony.root.RootStep;
-import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
-import br.com.braille.xml.scorepartwise.part.measure.attributes.clef.Sign;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
+import br.com.braille.xml.Score;
+import br.com.braille.xml.score.ScorePartwise;
+import br.com.braille.xml.score.scorepartwise.part.Measure;
+import br.com.braille.xml.score.scorepartwise.part.measure.Attributes;
+import br.com.braille.xml.score.scorepartwise.part.measure.Barline;
+import br.com.braille.xml.score.scorepartwise.part.measure.Harmony;
+import br.com.braille.xml.score.scorepartwise.part.measure.Note;
+import br.com.braille.xml.score.scorepartwise.part.measure.barline.Location;
+import br.com.braille.xml.score.scorepartwise.part.measure.barline.repeat.Direction;
+import br.com.braille.xml.score.scorepartwise.part.measure.barline.ending.EndingType;
+import br.com.braille.xml.score.scorepartwise.part.measure.harmony.Kind;
+import br.com.braille.xml.score.scorepartwise.part.measure.harmony.root.RootStep;
+import br.com.braille.xml.score.scorepartwise.part.measure.note.NoteType;
+import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Step;
+import br.com.braille.xml.score.scorepartwise.part.measure.attributes.clef.Sign;
+import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Octave;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.liblouis.CompilationException;
+import org.liblouis.DisplayException;
+import org.liblouis.TranslationException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -223,6 +227,12 @@ public class ScoreTest {
         assertTrue(note.isRest());
         assertEquals(4, note.getDuration());
         assertEquals(NoteType.HALF, note.getNoteType());
+    }
+
+    @Test
+    public void validaToBraille() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException, CompilationException, TranslationException, DisplayException {
+        Score score = new Score(testFilePath);
+        System.out.println(score.toBraille());
     }
 
 }
