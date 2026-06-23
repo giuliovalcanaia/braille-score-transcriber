@@ -6,11 +6,6 @@ import br.com.braille.service.TranscreverParaBraille;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Note;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +14,7 @@ public class Score implements Brailleable {
     private Desempacotador desempacotador;
     private ScorePartwise scorePartwise;
 
-    public Score(String filePath) throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
+    public Score(String filePath) {
         this.desempacotador = new Desempacotador(filePath);
         this.scorePartwise = desempacotador.carregarPartitura();
         calculaMarcacaoOitava();
