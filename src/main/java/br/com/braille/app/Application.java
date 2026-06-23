@@ -1,14 +1,10 @@
 package br.com.braille.app;
 
-import br.com.braille.service.ContextoMusical;
 import br.com.braille.service.Desempacotador;
-import br.com.braille.service.TranscritorParaBraille;
-import br.com.braille.xml.ScorePartwise;
-import br.com.braille.xml.scorepartwise.part.Measure;
-import br.com.braille.xml.scorepartwise.part.measure.Note;
-import br.com.braille.xml.scorepartwise.part.measure.note.Pitch;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
+import br.com.braille.service.TranscreverParaBraille;
+import br.com.braille.xml.score.ScorePartwise;
+import br.com.braille.xml.score.scorepartwise.part.Measure;
+import br.com.braille.xml.score.scorepartwise.part.measure.Note;
 import org.liblouis.CompilationException;
 import org.liblouis.DisplayException;
 import org.liblouis.TranslationException;
@@ -19,7 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class Aplication extends ContextoMusical {
+public class Application {
 
     public static void main(String[] args) throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException, CompilationException, TranslationException, DisplayException {
         String testFilePath;
@@ -36,13 +32,13 @@ public class Aplication extends ContextoMusical {
         System.out.println("==== Partitura transcrita em braille ====");
 
         // Título
-        System.out.println(TranscritorParaBraille.textoParaBraille(titulo));
+        System.out.println(TranscreverParaBraille.textoParaBraille(titulo));
 
         // Fórmula de compasso
         System.out.print(compassos.get(0).getAttributes().getTime().toBraille());
 
         // Compassos
-        Boolean imprimiuClave = false;
+        boolean imprimiuClave = false;
         for (int i = 0; i < compassos.size(); i++) {
             if (compassos.get(i).isPrint()) {
                 // Imprime a quebra de linha
@@ -54,7 +50,7 @@ public class Aplication extends ContextoMusical {
                 imprimiuClave = true;
             }
             for (Note nota : compassos.get(i).getNotes()) {
-                if (TranscritorParaBraille.precisaOitava(nota)) {
+                if (TranscreverParaBraille.precisaOitava(nota)) {
                     System.out.print(nota.getPitch().getOctave().toBraille());
                 }
                 // Imprime as notas
@@ -64,8 +60,8 @@ public class Aplication extends ContextoMusical {
             System.out.print(" ");
         }
 
-        setUltimaNota(null);
-        setUltimaNotaReal(null);
+        TranscreverParaBraille.setUltimaNota(null);
+        TranscreverParaBraille.setUltimaNotaReal(null);
 
         System.out.println();
 
@@ -74,7 +70,7 @@ public class Aplication extends ContextoMusical {
         System.out.println("======== Partitura com explicação =======");
 
         // Título
-        System.out.println("Título: " + TranscritorParaBraille.textoParaBraille(titulo));
+        System.out.println("Título: " + TranscreverParaBraille.textoParaBraille(titulo));
         System.out.println("Título: " + titulo);
         System.out.println();
 
@@ -98,7 +94,7 @@ public class Aplication extends ContextoMusical {
             System.out.println();
             System.out.println("Compasso " + (i + 1));
             for (Note nota : compassos.get(i).getNotes()) {
-                if (TranscritorParaBraille.precisaOitava(nota)) {
+                if (TranscreverParaBraille.precisaOitava(nota)) {
                     System.out.print(nota.getPitch().getOctave().toBraille() + " = ");
                     System.out.println("Oitava " + nota.getPitch().getOctave().toString());
                 }
