@@ -1,9 +1,7 @@
 package br.com.braille.xml.score.scorepartwise.part.measure.attributes;
 
+import br.com.braille.models.Brailleable;
 import br.com.braille.service.TranscreverParaBraille;
-import org.liblouis.CompilationException;
-import org.liblouis.DisplayException;
-import org.liblouis.TranslationException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "time")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Time {
+public class Time implements Brailleable {
 
     @XmlElement(name = "beats")
     private Integer beats;
@@ -28,7 +26,8 @@ public class Time {
         return beatType;
     }
 
-    public String toBraille() throws CompilationException, TranslationException, DisplayException {
+    @Override
+    public String toBraille() {
         // Remove o indicador numérico L invertido
         String numerador = TranscreverParaBraille.textoParaBraille(beats.toString()).substring(1);
         String denominador = switch (beatType) {
