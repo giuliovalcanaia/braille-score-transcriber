@@ -1,5 +1,6 @@
 package br.com.braille.xml.score.scorepartwise.part.measure;
 
+import br.com.braille.models.Brailleable;
 import br.com.braille.service.TranscreverParaBraille;
 import br.com.braille.xml.score.scorepartwise.part.measure.note.Pitch;
 import br.com.braille.xml.score.scorepartwise.part.measure.note.Tied;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @XmlRootElement(name = "note")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Note {
+public class Note implements Brailleable {
     // Tag exclusiva da notação braille
     boolean octaveMarkRequired;
 
@@ -61,6 +62,7 @@ public class Note {
         this.octaveMarkRequired = octaveMarkRequired;
     }
 
+    @Override
     public String toBraille() {
         if (isRest()) {
             return TranscreverParaBraille.pausasParaBraille(getNoteType());
