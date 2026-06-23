@@ -1,5 +1,6 @@
 package br.com.braille.service;
 
+import br.com.braille.exception.PartituraLoadException;
 import br.com.braille.xml.score.ScorePartwise;
 import org.xml.sax.*;
 
@@ -42,7 +43,7 @@ public class Desempacotador {
 
         // Tratamento de erro
         } catch (JAXBException | SAXException | ParserConfigurationException | FileNotFoundException e) {
-            throw new RuntimeException("Erro ao carregar a partitura: " + e.getMessage(), e);
+            throw new PartituraLoadException("Erro ao carregar a partitura: " + e.getMessage(), e);
         }
     }
 }
