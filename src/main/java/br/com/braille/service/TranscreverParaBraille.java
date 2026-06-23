@@ -1,16 +1,17 @@
 package br.com.braille.service;
 
-import br.com.braille.xml.scorepartwise.part.measure.Note;
-import br.com.braille.xml.scorepartwise.part.measure.note.NoteType;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Octave;
-import br.com.braille.xml.scorepartwise.part.measure.note.pitch.Step;
+import br.com.braille.xml.score.scorepartwise.part.measure.Note;
+import br.com.braille.xml.score.scorepartwise.part.measure.note.NoteType;
+import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Step;
 import org.liblouis.*;
 import org.liblouis.DisplayTable.StandardDisplayTables;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TranscritorParaBraille extends ContextoMusical{
+public class TranscreverParaBraille {
+    private static Note ultimaNota = null;
+    private static Note ultimaNotaReal = null;
     private static final String TABELA = "pt-pt-g1.utb";
     private static final Map<NoteType, Map<Step, String>> tabelaNotasBraille;
     private static final Map<NoteType, String> tabelaPausasBraille;
@@ -18,7 +19,6 @@ public class TranscritorParaBraille extends ContextoMusical{
     // Inicialização estática - é tipo um construtor
     static {
         tabelaNotasBraille = new HashMap<>();
-        tabelaPausasBraille = new HashMap<>();
 
         // WHOLE semibreve
         tabelaNotasBraille.put(NoteType.WHOLE, Map.of(
@@ -53,6 +53,8 @@ public class TranscritorParaBraille extends ContextoMusical{
         tabelaNotasBraille.put(NoteType.ONE_HUNDRED_TWENTY_EIGHTH, tabelaNotasBraille.get(NoteType.EIGHTH));
 
         // Pausas
+        tabelaPausasBraille = new HashMap<>();
+
         tabelaPausasBraille.put(NoteType.WHOLE, "⠍");
         tabelaPausasBraille.put(NoteType.HALF, "⠥");
         tabelaPausasBraille.put(NoteType.QUARTER, "⠧");
@@ -78,8 +80,6 @@ public class TranscritorParaBraille extends ContextoMusical{
     }
 
     public static boolean precisaOitava(Note notaAtual) {
-//        System.out.println("Nota atual " + notaAtual);
-//        System.out.println("Ultima nota " + ultimaNota);
         if (ultimaNota == null || notaAtual.isRest()) {
             ultimaNota = notaAtual;
             return false;
@@ -106,6 +106,21 @@ public class TranscritorParaBraille extends ContextoMusical{
             ultimaNotaReal = ultimaNota;
             return true;
         }
+    }
 
+    public static Note getUltimaNota() {
+        return ultimaNota;
+    }
+
+    public static void setUltimaNota(Note ultimaNota) {
+        TranscreverParaBraille.ultimaNota = ultimaNota;
+    }
+
+    public static Note getUltimaNotaReal() {
+        return ultimaNotaReal;
+    }
+
+    public static void setUltimaNotaReal(Note ultimaNotaReal) {
+        TranscreverParaBraille.ultimaNotaReal = ultimaNotaReal;
     }
 }
