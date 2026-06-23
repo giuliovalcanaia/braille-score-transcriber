@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TranscreverParaBraille {
-    private static Note ultimaNota = null;
-    private static Note ultimaNotaReal = null;
     private static final String TABELA = "pt-pt-g1.utb";
     private static final Map<NoteType, Map<Step, String>> tabelaNotasBraille;
     private static final Map<NoteType, String> tabelaPausasBraille;
@@ -79,48 +77,4 @@ public class TranscreverParaBraille {
         return tabelaPausasBraille.get(noteType);
     }
 
-    public static boolean precisaOitava(Note notaAtual) {
-        if (ultimaNota == null || notaAtual.isRest()) {
-            ultimaNota = notaAtual;
-            return false;
-        }
-
-        if (ultimaNotaReal == null) {
-            ultimaNota = notaAtual;
-            ultimaNotaReal = ultimaNota;
-            return true;
-        }
-
-        ultimaNota = notaAtual;
-        ultimaNotaReal = ultimaNota;
-        int posAnterior = ((ultimaNotaReal.getPitch().getOctave().getDescricao() - 1) * 7) + ultimaNotaReal.getPitch().getStep().getReferencia();
-        int posAtual  = ((notaAtual.getPitch().getOctave().getDescricao() - 1) * 7) + notaAtual.getPitch().getStep().getReferencia();
-        int intervalo  = Math.abs(posAtual - posAnterior) + 1;
-
-        if (intervalo <= 3) {
-            ultimaNotaReal = ultimaNota;
-            return false;
-        } else if (intervalo <= 5) {
-            return notaAtual.getPitch().getOctave() != ultimaNotaReal.getPitch().getOctave();
-        } else {
-            ultimaNotaReal = ultimaNota;
-            return true;
-        }
-    }
-
-    public static Note getUltimaNota() {
-        return ultimaNota;
-    }
-
-    public static void setUltimaNota(Note ultimaNota) {
-        TranscreverParaBraille.ultimaNota = ultimaNota;
-    }
-
-    public static Note getUltimaNotaReal() {
-        return ultimaNotaReal;
-    }
-
-    public static void setUltimaNotaReal(Note ultimaNotaReal) {
-        TranscreverParaBraille.ultimaNotaReal = ultimaNotaReal;
-    }
 }
