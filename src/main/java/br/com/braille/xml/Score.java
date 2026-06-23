@@ -64,6 +64,7 @@ public class Score implements Brailleable {
                 }
                 string += nota.toBraille();
             }
+            // Imprime a separação de compassos
             string += " ";
         }
         return string;
