@@ -50,7 +50,7 @@ public class Application {
                 imprimiuClave = true;
             }
             for (Note nota : compassos.get(i).getNotes()) {
-                if (TranscreverParaBraille.precisaOitava(nota)) {
+                if (nota.isOctaveMarkRequired()) {
                     System.out.print(nota.getPitch().getOctave().toBraille());
                 }
                 // Imprime as notas
@@ -59,9 +59,6 @@ public class Application {
             // Imprime as marcações de compasso
             System.out.print(" ");
         }
-
-        TranscreverParaBraille.setUltimaNota(null);
-        TranscreverParaBraille.setUltimaNotaReal(null);
 
         System.out.println();
 
@@ -94,7 +91,7 @@ public class Application {
             System.out.println();
             System.out.println("Compasso " + (i + 1));
             for (Note nota : compassos.get(i).getNotes()) {
-                if (TranscreverParaBraille.precisaOitava(nota)) {
+                if (nota.isOctaveMarkRequired()) {
                     System.out.print(nota.getPitch().getOctave().toBraille() + " = ");
                     System.out.println("Oitava " + nota.getPitch().getOctave().toString());
                 }
