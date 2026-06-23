@@ -9,46 +9,44 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum Sign implements Brailleable {
 
     @XmlEnumValue("G")
-    G,
+    G("𝄞", "⠜⠌⠇"),
 
     @XmlEnumValue("F")
-    F,
+    F("𝄢", "⠜⠼⠇"),
 
     @XmlEnumValue("C")
-    C,
+    C("𝄡", "⠜⠬⠇"),
 
     @XmlEnumValue("percussion")
-    PERCUSSION,
+    PERCUSSION("PERCUSSION", "PERCUSSION"),
 
     // The TAB sign indicates that the music that follows should be in tablature notation.
     @XmlEnumValue("TAB")
-    TAB,
+    TAB("TAB", "TAB"),
 
     // The jianpu sign indicates that the music that follows should be in jianpu numbered notation. Unlike TAB, a jianpu sign does not correspond to a visual clef notation.
     @XmlEnumValue("jianpu")
-    JIANPU,
+    JIANPU("JIANPU", "JIANPU"),
 
     // Deprecated as of MusicXML 4.0. Use the clef element's print-object attribute instead. When the none sign is used, notes should be displayed as if in treble clef.
     @XmlEnumValue("none")
-    NONE;
+    NONE("NONE", "NONE");
+
+    private String descricao;
+    private String descricaoBraille;
+
+    Sign(String descricao, String descricaoBraille) {
+        this.descricao = descricao;
+        this.descricaoBraille = descricaoBraille;
+    }
 
     @Override
     public String toString() {
-        return switch (this) {
-            case G -> "𝄞";
-            case F -> "𝄢";
-            case C -> "𝄡";
-            default -> name();
-        };
+        return descricao;
     }
 
     @Override
     public String toBraille() {
-        return switch (this) {
-            case G -> "⠜⠌⠇";
-            case F -> "⠜⠼⠇";
-            case C -> "⠜⠬⠇";
-            default -> name();
-        };
+        return descricaoBraille;
     }
 }
