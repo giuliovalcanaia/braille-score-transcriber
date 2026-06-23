@@ -70,6 +70,58 @@ public class Score implements Brailleable {
         return string;
     }
 
+    @Override
+    public String toString() {
+        String string;
+        List<Measure> compassos = this.getScorePartwise().getParts().get(0).getMeasures();
+        boolean imprimiuClave = false;
+
+        string = "======== Partitura com explicação =======\n";
+
+        // Título
+        String titulo = this.getScorePartwise().getCredits().get(0).getCreditWords();
+        try {
+            string += "Título: " + TranscreverParaBraille.textoParaBraille(titulo) + "\n";
+        } catch (TranslationException | DisplayException e) {
+            string += "Título: [erro ao transcrever: " + e.getMessage() + "]\n";
+        }
+        string += "Título: " + titulo + "\n\n";
+
+        // Fórmula de compasso
+        try {
+            string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toBraille() + "\n";
+        } catch (CompilationException | TranslationException | DisplayException e) {
+            string += "Fórmula de compasso: [erro ao transcrever: " + e.getMessage() + "]\n";
+        }
+        string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toString() + "\n";
+
+        // Compassos
+        for (int i = 0; i < compassos.size(); i++) {
+            if (compassos.get(i).isPrint()) {
+                string += "\n";
+            }
+            if (!imprimiuClave) {
+                string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toBraille() + " \n";
+                string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toString() + " \n";
+                imprimiuClave = true;
+            }
+            string += "\nCompasso " + (i + 1) + "\n";
+            for (Note nota : compassos.get(i).getNotes()) {
+                if (nota.isOctaveMarkRequired()) {
+                    string += nota.getPitch().getOctave().toBraille() + " = ";
+                    string += "Oitava " + nota.getPitch().getOctave().toString() + "\n";
+                }
+                string += nota.toBraille() + " = ";
+                string += nota.toString() + "\n";
+            }
+            string += " \n";
+        }
+
+        string += "\n=========================================";
+
+        return string;
+    }
+
     public void calculaMarcacaoOitava() {
         Note ultimaNota = null;
         Note ultimaNotaReal = null;

@@ -233,6 +233,7 @@ public class ScoreTest {
     public void validaToBraille() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException, CompilationException, TranslationException, DisplayException {
         Score score = new Score(testFilePath);
         System.out.println(score.toBraille());
+        System.out.println(score.toString());
     }
 
 }
