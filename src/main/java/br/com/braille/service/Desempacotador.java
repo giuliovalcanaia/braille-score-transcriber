@@ -1,6 +1,6 @@
 package br.com.braille.service;
 
-import br.com.braille.xml.ScorePartwise;
+import br.com.braille.xml.score.ScorePartwise;
 import org.xml.sax.*;
 
 import javax.xml.bind.JAXBContext;

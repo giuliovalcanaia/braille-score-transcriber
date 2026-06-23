@@ -1,0 +1,26 @@
+package br.com.braille.xml.score.scorepartwise;
+
+import br.com.braille.xml.score.scorepartwise.part.Measure;
+
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@XmlRootElement(name = "part")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Part{
+
+    @XmlAttribute
+    private String id;
+
+    @XmlElement(name = "measure")
+    private List<Measure> measures = new ArrayList<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public List<Measure> getMeasures() {
+        return measures;
+    }
+}
