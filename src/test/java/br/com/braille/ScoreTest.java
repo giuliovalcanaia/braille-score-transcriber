@@ -20,11 +20,7 @@ import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Octave;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +31,7 @@ public class ScoreTest {
     private ScorePartwise scorePartwise;
 
     @BeforeEach
-    public void setUp() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
+    public void setUp() {
         this.testFilePath = "src/test/resources/Asa-Branca.musicxml";
         desempacotador = new Desempacotador(testFilePath);
         scorePartwise = desempacotador.carregarPartitura();
@@ -227,7 +223,7 @@ public class ScoreTest {
     }
 
     @Test
-    public void validaToBraille() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
+    public void validaToBraille() {
         Score score = new Score(testFilePath);
         System.out.println(score.toBraille());
     }
