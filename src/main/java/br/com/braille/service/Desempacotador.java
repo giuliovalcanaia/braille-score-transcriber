@@ -20,23 +20,29 @@ public class Desempacotador {
         this.arquivoXML = new File(pathArquivo);
     }
 
-    public ScorePartwise carregarPartitura() throws JAXBException, SAXException, ParserConfigurationException, FileNotFoundException {
-        // Classe alvo
-        JAXBContext contexto = JAXBContext.newInstance(ScorePartwise.class);
+    public ScorePartwise carregarPartitura() {
+        try {
+            // Classe alvo
+            JAXBContext contexto = JAXBContext.newInstance(ScorePartwise.class);
 
-        // Criamos o objeto desempacotador
-        Unmarshaller unmarshaller = contexto.createUnmarshaller();
+            // Criamos o objeto desempacotador
+            Unmarshaller unmarshaller = contexto.createUnmarshaller();
 
-        // Burocracias para ignorar o DTD (método que define a estrutura e os elementos permitidos)
-        SAXParserFactory spf = SAXParserFactory.newInstance();
-        spf.setValidating(false);
-        spf.setFeature("http://xml.org/sax/features/validation", false);
-        spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
-        InputSource inputSource = new InputSource(new FileReader(arquivoXML));
-        SAXSource source = new SAXSource(xmlReader, inputSource);
+            // Burocracias para ignorar o DTD (método que define a estrutura e os elementos permitidos)
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            spf.setValidating(false);
+            spf.setFeature("http://xml.org/sax/features/validation", false);
+            spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+            InputSource inputSource = new InputSource(new FileReader(arquivoXML));
+            SAXSource source = new SAXSource(xmlReader, inputSource);
 
-        // Aqui acontece a desserialização
-        return (ScorePartwise) unmarshaller.unmarshal(source);
+            // Aqui acontece a desserialização
+            return (ScorePartwise) unmarshaller.unmarshal(source);
+
+        // Tratamento de erro
+        } catch (JAXBException | SAXException | ParserConfigurationException | FileNotFoundException e) {
+            throw new RuntimeException("Erro ao carregar a partitura: " + e.getMessage(), e);
+        }
     }
 }
