@@ -20,9 +20,6 @@ import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Octave;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.liblouis.CompilationException;
-import org.liblouis.DisplayException;
-import org.liblouis.TranslationException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -230,10 +227,9 @@ public class ScoreTest {
     }
 
     @Test
-    public void validaToBraille() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException, CompilationException, TranslationException, DisplayException {
+    public void validaToBraille() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
         Score score = new Score(testFilePath);
         System.out.println(score.toBraille());
-        System.out.println(score.toString());
     }
 
 }
