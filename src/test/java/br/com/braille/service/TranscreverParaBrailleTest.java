@@ -12,11 +12,6 @@ import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +21,7 @@ public class TranscreverParaBrailleTest {
     private Score score;
 
     @BeforeEach
-    public void setUp() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
+    public void setUp() {
         this.testFilePath = "src/test/resources/Asa-Branca.musicxml";
         score = new Score(testFilePath);
     }
