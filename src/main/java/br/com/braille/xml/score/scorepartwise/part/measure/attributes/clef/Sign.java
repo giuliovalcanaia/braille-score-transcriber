@@ -1,10 +1,12 @@
 package br.com.braille.xml.score.scorepartwise.part.measure.attributes.clef;
 
+import br.com.braille.models.Brailleable;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlEnum
-public enum Sign {
+public enum Sign implements Brailleable {
 
     @XmlEnumValue("G")
     G,
@@ -40,6 +42,7 @@ public enum Sign {
         };
     }
 
+    @Override
     public String toBraille() {
         return switch (this) {
             case G -> "⠜⠌⠇";
