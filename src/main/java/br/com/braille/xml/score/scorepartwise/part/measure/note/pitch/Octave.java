@@ -1,10 +1,12 @@
 package br.com.braille.xml.score.scorepartwise.part.measure.note.pitch;
 
+import br.com.braille.models.Brailleable;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlEnum
-public enum Octave {
+public enum Octave implements Brailleable {
 
     @XmlEnumValue("1")
     FIRST(1,"⠈"),
@@ -44,6 +46,7 @@ public enum Octave {
         return descricao;
     }
 
+    @Override
     public String toBraille() {
         return descricaoBraille;
     }
