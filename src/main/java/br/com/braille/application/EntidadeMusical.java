@@ -2,10 +2,6 @@ package br.com.braille.application;
 
 import java.io.Serializable;
 
-/**
- * Classe abstrata de exemplo criada para atender requisitos acadêmicos.
- * Não faz parte do domínio real do BrailleScoreTranscriber.
- */
 public abstract class EntidadeMusical implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,8 +20,5 @@ public abstract class EntidadeMusical implements Serializable {
         this.id = id;
     }
 
-    /**
-     * Método abstrato que deve ser implementado pelas subclasses.
-     */
     public abstract String toBrailleResumido();
 }
