@@ -67,4 +67,19 @@ public class Measure implements Brailleable {
         }
         return string;
     }
+
+    @Override
+    public String toString() {
+        String string = "\nCompasso " + number + "\n";
+        for (Note nota : notes) {
+            if (nota.isOctaveMarkRequired()) {
+                string += nota.getPitch().getOctave().toBraille() + " = ";
+                string += "Oitava " + nota.getPitch().getOctave().toString() + "\n";
+            }
+            string += nota.toBraille() + " = ";
+            string += nota.toString() + "\n";
+        }
+        string += " \n";
+        return string;
+    }
 }
