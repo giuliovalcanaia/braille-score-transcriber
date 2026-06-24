@@ -223,6 +223,7 @@ public class ScoreTest {
     }
 
     @Test
+    @DisplayName("Teste 10: saída final")
     public void validaToBraille() {
         Score score = new Score(testFilePath);
         System.out.println(score.toBraille());
