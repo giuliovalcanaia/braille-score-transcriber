@@ -6,14 +6,6 @@ import br.com.braille.service.TranscreverParaBraille;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Note;
-import org.liblouis.CompilationException;
-import org.liblouis.DisplayException;
-import org.liblouis.TranslationException;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +14,7 @@ public class Score implements Brailleable {
     private Desempacotador desempacotador;
     private ScorePartwise scorePartwise;
 
-    public Score(String filePath) throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
+    public Score(String filePath) {
         this.desempacotador = new Desempacotador(filePath);
         this.scorePartwise = desempacotador.carregarPartitura();
         calculaMarcacaoOitava();
@@ -33,7 +25,7 @@ public class Score implements Brailleable {
     }
 
     @Override
-    public String toBraille() throws CompilationException, TranslationException, DisplayException {
+    public String toBraille() {
         String string;
         List<Measure> compassos = this.getScorePartwise().getParts().get(0).getMeasures();
         boolean imprimiuClave = false;
@@ -80,19 +72,11 @@ public class Score implements Brailleable {
 
         // Título
         String titulo = this.getScorePartwise().getCredits().get(0).getCreditWords();
-        try {
-            string += "Título: " + TranscreverParaBraille.textoParaBraille(titulo) + "\n";
-        } catch (TranslationException | DisplayException e) {
-            string += "Título: [erro ao transcrever: " + e.getMessage() + "]\n";
-        }
+        string += "Título: " + TranscreverParaBraille.textoParaBraille(titulo) + "\n";
         string += "Título: " + titulo + "\n\n";
 
         // Fórmula de compasso
-        try {
-            string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toBraille() + "\n";
-        } catch (CompilationException | TranslationException | DisplayException e) {
-            string += "Fórmula de compasso: [erro ao transcrever: " + e.getMessage() + "]\n";
-        }
+        string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toBraille() + "\n";
         string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toString() + "\n";
 
         // Compassos

@@ -12,14 +12,6 @@ import br.com.braille.xml.score.scorepartwise.part.measure.note.pitch.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.liblouis.CompilationException;
-import org.liblouis.DisplayException;
-import org.liblouis.TranslationException;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,21 +21,21 @@ public class TranscreverParaBrailleTest {
     private Score score;
 
     @BeforeEach
-    public void setUp() throws JAXBException, FileNotFoundException, ParserConfigurationException, SAXException {
+    public void setUp() {
         this.testFilePath = "src/test/resources/Asa-Branca.musicxml";
         score = new Score(testFilePath);
     }
 
     @Test
     @DisplayName("Teste 1: Transcrição caractere `a` para português")
-    public void validaCaracteresimples() throws CompilationException, TranslationException, DisplayException {
+    public void validaCaracteresimples() {
         assertEquals("⠁", TranscreverParaBraille.textoParaBraille("a"));
     }
 
 
     @Test
     @DisplayName("Teste 2: Verifica transcrição do título para Braille")
-    public void validaTranscricaoTituloBraille() throws CompilationException, TranslationException, DisplayException {
+    public void validaTranscricaoTituloBraille() {
         String titulo = score.getScorePartwise().getCredits().get(0).getCreditWords();
 
         assertEquals("⠨⠁⠎⠁⠀⠃⠗⠁⠝⠉⠁", TranscreverParaBraille.textoParaBraille(titulo));
@@ -51,7 +43,7 @@ public class TranscreverParaBrailleTest {
 
     @Test
     @DisplayName("Teste 3: Verifica transcrição do compasso para Braille (2/4)")
-    public void validaTranscricaoTimeSignatureBraille() throws CompilationException, TranslationException, DisplayException {
+    public void validaTranscricaoTimeSignatureBraille() {
         Time time = score.getScorePartwise().getParts().get(0).getMeasures().get(0).getAttributes().getTime();
 
         assertEquals("⠼⠃⠲", time.toBraille());
