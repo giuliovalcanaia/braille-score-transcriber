@@ -5,12 +5,17 @@ import br.com.braille.service.Desempacotador;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Note;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Score implements Brailleable {
+public class Score implements Brailleable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String filePath;
-    private Desempacotador desempacotador;
+    private transient Desempacotador desempacotador;
     private ScorePartwise scorePartwise;
 
     public Score(String filePath) {

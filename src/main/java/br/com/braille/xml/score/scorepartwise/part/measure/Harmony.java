@@ -8,10 +8,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serial;
+import java.io.Serializable;
 
 @XmlRootElement(name = "harmony")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Harmony implements Brailleable {
+public class Harmony implements Brailleable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "root")
     private Root root;

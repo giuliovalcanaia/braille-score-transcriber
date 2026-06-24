@@ -9,10 +9,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serial;
+import java.io.Serializable;
 
 @XmlRootElement(name = "barline")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Barline {
+public class Barline implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @XmlAttribute(name = "location")
     private Location location;

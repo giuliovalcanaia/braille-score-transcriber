@@ -7,10 +7,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serial;
+import java.io.Serializable;
 
 @XmlRootElement(name = "clef")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Clef implements Brailleable {
+public class Clef implements Brailleable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "sign")
     private Sign sign;
