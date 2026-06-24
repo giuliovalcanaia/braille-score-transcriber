@@ -25,7 +25,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'br.com.braille.app.Application'
+    mainClass = 'br.com.braille.application.Application'
     applicationDefaultJvmArgs = ['--enable-native-access=ALL-UNNAMED']
 }
 
