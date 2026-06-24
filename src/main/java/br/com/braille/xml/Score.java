@@ -84,6 +84,7 @@ public class Score implements Brailleable {
                 imprimiuClave = true;
             }
             string += compassos.get(i).toString();
+            string += "\n";
         }
 
         string += "\n=========================================";

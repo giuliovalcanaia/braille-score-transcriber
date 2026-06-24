@@ -226,7 +226,10 @@ public class ScoreTest {
     @DisplayName("Teste 10: saída final")
     public void validaToBraille() {
         Score score = new Score(testFilePath);
+        System.out.println("======== Partitura em Braille ========");
         System.out.println(score.toBraille());
+        System.out.println("================ Fim =================");
+        System.out.println();
         System.out.println(score.toString());
     }
 
