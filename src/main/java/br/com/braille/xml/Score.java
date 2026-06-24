@@ -48,14 +48,9 @@ public class Score implements Brailleable {
                 imprimiuClave = true;
             }
 
-            // Imprime as notas
-            for (Note nota : compassos.get(i).getNotes()) {
-                // Imprime a marcação de oitava, caso precise
-                if (nota.isOctaveMarkRequired()) {
-                    string += nota.getPitch().getOctave().toBraille();
-                }
-                string += nota.toBraille();
-            }
+            // Imprime as notas do compasso
+            string += compassos.get(i).toBraille();
+
             // Imprime a separação de compassos
             string += " ";
         }
