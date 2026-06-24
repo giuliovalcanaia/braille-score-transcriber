@@ -1,7 +1,6 @@
-package br.com.braille;
+package br.com.braille.xml;
 
 import br.com.braille.service.Desempacotador;
-import br.com.braille.xml.Score;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Attributes;
