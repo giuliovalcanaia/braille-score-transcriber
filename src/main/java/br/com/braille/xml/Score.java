@@ -84,16 +84,7 @@ public class Score implements Brailleable {
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toString() + " \n";
                 imprimiuClave = true;
             }
-            string += "\nCompasso " + (i + 1) + "\n";
-            for (Note nota : compassos.get(i).getNotes()) {
-                if (nota.isOctaveMarkRequired()) {
-                    string += nota.getPitch().getOctave().toBraille() + " = ";
-                    string += "Oitava " + nota.getPitch().getOctave().toString() + "\n";
-                }
-                string += nota.toBraille() + " = ";
-                string += nota.toString() + "\n";
-            }
-            string += " \n";
+            string += compassos.get(i).toString();
         }
 
         string += "\n=========================================";
