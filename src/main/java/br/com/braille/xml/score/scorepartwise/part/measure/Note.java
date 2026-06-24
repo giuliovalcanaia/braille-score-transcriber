@@ -17,7 +17,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Note implements Brailleable {
     // Tag exclusiva da notação braille
-    boolean octaveMarkRequired;
+    private boolean octaveMarkRequired;
 
     @XmlElement(name = "pitch")
     private Pitch pitch;
