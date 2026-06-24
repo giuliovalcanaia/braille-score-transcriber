@@ -1,5 +1,6 @@
 package br.com.braille.xml.score.scorepartwise.part;
 
+import br.com.braille.models.Brailleable;
 import br.com.braille.xml.score.scorepartwise.part.measure.Attributes;
 import br.com.braille.xml.score.scorepartwise.part.measure.Barline;
 import br.com.braille.xml.score.scorepartwise.part.measure.Harmony;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @XmlRootElement(name = "measure")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Measure{
+public class Measure implements Brailleable {
 
     @XmlAttribute(name = "number")
     private String number;
@@ -53,5 +54,31 @@ public class Measure{
 
     public boolean isPrint() {
         return print != null;
+    }
+
+    @Override
+    public String toBraille() {
+        String string = "";
+        for (Note nota : notes) {
+            if (nota.isOctaveMarkRequired()) {
+                string += nota.getPitch().getOctave().toBraille();
+            }
+            string += nota.toBraille();
+        }
+        return string;
+    }
+
+    @Override
+    public String toString() {
+        String string = "\nCompasso " + number + "\n";
+        for (Note nota : notes) {
+            if (nota.isOctaveMarkRequired()) {
+                string += nota.getPitch().getOctave().toBraille() + " = ";
+                string += "Oitava " + nota.getPitch().getOctave().toString() + "\n";
+            }
+            string += nota.toBraille() + " = ";
+            string += nota.toString() + "\n";
+        }
+        return string;
     }
 }

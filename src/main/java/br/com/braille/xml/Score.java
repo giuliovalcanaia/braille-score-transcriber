@@ -2,7 +2,6 @@ package br.com.braille.xml;
 
 import br.com.braille.models.Brailleable;
 import br.com.braille.service.Desempacotador;
-import br.com.braille.service.TranscreverParaBraille;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Note;
@@ -31,7 +30,7 @@ public class Score implements Brailleable {
         boolean imprimiuClave = false;
 
         // Título
-        string = TranscreverParaBraille.textoParaBraille(this.getScorePartwise().getCredits().get(0).getCreditWords());
+        string = this.getScorePartwise().getCredits().get(0).toBraille();
 
         // Fórmula de compasso
         string += "\n" + compassos.get(0).getAttributes().getTime().toBraille();
@@ -44,18 +43,13 @@ public class Score implements Brailleable {
             }
             // Clave
             if (!imprimiuClave) {
-                string += compassos.get(0).getAttributes().getClef().getSign().toBraille() + " ";
+                string += compassos.get(0).getAttributes().getClef().toBraille() + " ";
                 imprimiuClave = true;
             }
 
-            // Imprime as notas
-            for (Note nota : compassos.get(i).getNotes()) {
-                // Imprime a marcação de oitava, caso precise
-                if (nota.isOctaveMarkRequired()) {
-                    string += nota.getPitch().getOctave().toBraille();
-                }
-                string += nota.toBraille();
-            }
+            // Imprime as notas do compasso
+            string += compassos.get(i).toBraille();
+
             // Imprime a separação de compassos
             string += " ";
         }
@@ -72,7 +66,7 @@ public class Score implements Brailleable {
 
         // Título
         String titulo = this.getScorePartwise().getCredits().get(0).getCreditWords();
-        string += "Título: " + TranscreverParaBraille.textoParaBraille(titulo) + "\n";
+        string += "Título: " + this.getScorePartwise().getCredits().get(0).toBraille() + "\n";
         string += "Título: " + titulo + "\n\n";
 
         // Fórmula de compasso
@@ -85,20 +79,11 @@ public class Score implements Brailleable {
                 string += "\n";
             }
             if (!imprimiuClave) {
-                string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toBraille() + " \n";
-                string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toString() + " \n";
+                string += "Clave: " + compassos.get(0).getAttributes().getClef().toBraille() + " \n";
+                string += "Clave: " + compassos.get(0).getAttributes().getClef().toString() + " \n";
                 imprimiuClave = true;
             }
-            string += "\nCompasso " + (i + 1) + "\n";
-            for (Note nota : compassos.get(i).getNotes()) {
-                if (nota.isOctaveMarkRequired()) {
-                    string += nota.getPitch().getOctave().toBraille() + " = ";
-                    string += "Oitava " + nota.getPitch().getOctave().toString() + "\n";
-                }
-                string += nota.toBraille() + " = ";
-                string += nota.toString() + "\n";
-            }
-            string += " \n";
+            string += compassos.get(i).toString();
         }
 
         string += "\n=========================================";

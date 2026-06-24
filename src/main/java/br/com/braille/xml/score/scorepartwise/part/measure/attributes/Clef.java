@@ -1,5 +1,6 @@
 package br.com.braille.xml.score.scorepartwise.part.measure.attributes;
 
+import br.com.braille.models.Brailleable;
 import br.com.braille.xml.score.scorepartwise.part.measure.attributes.clef.Sign;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "clef")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Clef {
+public class Clef implements Brailleable {
 
     @XmlElement(name = "sign")
     private Sign sign;
@@ -23,5 +24,15 @@ public class Clef {
 
     public Integer getLine() {
         return line;
+    }
+
+    @Override
+    public String toBraille() {
+        return sign.toBraille();
+    }
+
+    @Override
+    public String toString() {
+        return sign.toString();
     }
 }

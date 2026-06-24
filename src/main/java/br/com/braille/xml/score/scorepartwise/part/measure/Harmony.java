@@ -1,5 +1,6 @@
 package br.com.braille.xml.score.scorepartwise.part.measure;
 
+import br.com.braille.models.Brailleable;
 import br.com.braille.xml.score.scorepartwise.part.measure.harmony.Kind;
 import br.com.braille.xml.score.scorepartwise.part.measure.harmony.Root;
 
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "harmony")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Harmony {
+public class Harmony implements Brailleable {
 
     @XmlElement(name = "root")
     private Root root;
@@ -24,5 +25,18 @@ public class Harmony {
 
     public Kind getKind() {
         return kind;
+    }
+
+    @Override
+    public String toBraille() {
+        String string = "";
+        string += root.toBraille();
+        string += kind.toBraille();
+        return string;
+    }
+
+    @Override
+    public String toString() {
+        return root.toString() + kind.toString();
     }
 }
