@@ -80,7 +80,7 @@ public class Score implements Brailleable {
             }
             if (!imprimiuClave) {
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().toBraille() + " \n";
-                string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toString() + " \n";
+                string += "Clave: " + compassos.get(0).getAttributes().getClef().toString() + " \n";
                 imprimiuClave = true;
             }
             string += compassos.get(i).toString();
