@@ -17,7 +17,7 @@ import java.util.List;
 
 @XmlRootElement(name = "note")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Note implements Brailleable, Serializable {
+public class Note implements Brailleable, Serializable, Comparable<Note> {
     @Serial
     private static final long serialVersionUID = 1L;
     // Tag exclusiva da notação braille
@@ -64,6 +64,11 @@ public class Note implements Brailleable, Serializable {
 
     public void setOctaveMarkRequired(boolean octaveMarkRequired) {
         this.octaveMarkRequired = octaveMarkRequired;
+    }
+
+    @Override
+    public int compareTo(Note outra) {
+        return CharSequence.compare(this.toString(), outra.toString());
     }
 
     @Override
