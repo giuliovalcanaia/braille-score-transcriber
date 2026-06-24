@@ -32,6 +32,10 @@ application {
 test {
     useJUnitPlatform()
     jvmArgs '--enable-native-access=ALL-UNNAMED'
+    testLogging {
+        showStandardStreams = true
+        events "passed", "skipped", "failed"
+    }
 }
 
 java {
