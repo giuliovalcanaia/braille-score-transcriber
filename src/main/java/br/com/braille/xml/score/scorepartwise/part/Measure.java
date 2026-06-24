@@ -79,7 +79,6 @@ public class Measure implements Brailleable {
             string += nota.toBraille() + " = ";
             string += nota.toString() + "\n";
         }
-        string += " \n";
         return string;
     }
 }
