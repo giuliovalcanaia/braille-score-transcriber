@@ -2,7 +2,6 @@ package br.com.braille.xml;
 
 import br.com.braille.models.Brailleable;
 import br.com.braille.service.Desempacotador;
-import br.com.braille.service.TranscreverParaBraille;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Note;
@@ -31,7 +30,7 @@ public class Score implements Brailleable {
         boolean imprimiuClave = false;
 
         // Título
-        string = TranscreverParaBraille.textoParaBraille(this.getScorePartwise().getCredits().get(0).getCreditWords());
+        string = this.getScorePartwise().getCredits().get(0).toBraille();
 
         // Fórmula de compasso
         string += "\n" + compassos.get(0).getAttributes().getTime().toBraille();
@@ -67,7 +66,7 @@ public class Score implements Brailleable {
 
         // Título
         String titulo = this.getScorePartwise().getCredits().get(0).getCreditWords();
-        string += "Título: " + TranscreverParaBraille.textoParaBraille(titulo) + "\n";
+        string += "Título: " + this.getScorePartwise().getCredits().get(0).toBraille() + "\n";
         string += "Título: " + titulo + "\n\n";
 
         // Fórmula de compasso
