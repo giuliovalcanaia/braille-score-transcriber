@@ -75,16 +75,16 @@ public class Score implements Brailleable {
 
         // Compassos
         for (int i = 0; i < compassos.size(); i++) {
-            if (compassos.get(i).isPrint()) {
-                string += "\n";
-            }
+//            if (compassos.get(i).isPrint()) {
+//                string += "\n";
+//            }
             if (!imprimiuClave) {
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().toBraille() + " \n";
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().toString() + " \n";
                 imprimiuClave = true;
             }
             string += compassos.get(i).toString();
-            string += "\n";
+//            string += "\n";
         }
 
         string += "\n=========================================";
