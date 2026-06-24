@@ -57,7 +57,7 @@ public class TranscreverParaBrailleTest {
 
         assertEquals(Sign.G, clef.getSign());
         assertEquals("𝄞", clef.getSign().toString());
-        assertEquals("⠜⠌⠇", clef.getSign().toBraille());
+        assertEquals("⠜⠌⠇", clef.toBraille());
     }
 
     @Test
