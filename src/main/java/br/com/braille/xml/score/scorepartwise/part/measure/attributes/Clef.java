@@ -30,4 +30,9 @@ public class Clef implements Brailleable {
     public String toBraille() {
         return sign.toBraille();
     }
+
+    @Override
+    public String toString() {
+        return sign.toString();
+    }
 }
