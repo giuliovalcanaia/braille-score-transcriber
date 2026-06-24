@@ -43,7 +43,7 @@ public class Score implements Brailleable {
             }
             // Clave
             if (!imprimiuClave) {
-                string += compassos.get(0).getAttributes().getClef().getSign().toBraille() + " ";
+                string += compassos.get(0).getAttributes().getClef().toBraille() + " ";
                 imprimiuClave = true;
             }
 
@@ -79,7 +79,7 @@ public class Score implements Brailleable {
                 string += "\n";
             }
             if (!imprimiuClave) {
-                string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toBraille() + " \n";
+                string += "Clave: " + compassos.get(0).getAttributes().getClef().toBraille() + " \n";
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().getSign().toString() + " \n";
                 imprimiuClave = true;
             }
