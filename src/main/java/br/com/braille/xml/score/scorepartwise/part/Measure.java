@@ -14,6 +14,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Measure implements Brailleable {
 
+    // Atributo exclusivo do braille
+    private int brailleSize = 0;
+
     @XmlAttribute(name = "number")
     private String number;
 
@@ -24,7 +27,7 @@ public class Measure implements Brailleable {
     private List<Note> notes = new ArrayList<>();
 
     @XmlElement(name = "harmony")
-    private List<Harmony> harmonies = new ArrayList<>();
+    private Harmony harmony;
 
     @XmlElement(name = "barline")
     private List<Barline> barlines = new ArrayList<>();
@@ -44,8 +47,8 @@ public class Measure implements Brailleable {
         return notes;
     }
 
-    public List<Harmony> getHarmonies() {
-        return harmonies;
+    public Harmony getHarmony() {
+        return harmony;
     }
 
     public List<Barline> getBarlines() {
@@ -56,6 +59,11 @@ public class Measure implements Brailleable {
         return print != null;
     }
 
+    public int getBrailleSize() {
+        // Soma um para adicionar um espaço em branco após cada compasso
+        return brailleSize + 1;
+    }
+
     @Override
     public String toBraille() {
         String string = "";
@@ -64,13 +72,14 @@ public class Measure implements Brailleable {
                 string += nota.getPitch().getOctave().toBraille();
             }
             string += nota.toBraille();
+            brailleSize++;
         }
         return string;
     }
 
     @Override
     public String toString() {
-        String string = "\nCompasso " + number + "\n";
+        String string = "---- Compasso " + number + " ----\n";
         for (Note nota : notes) {
             if (nota.isOctaveMarkRequired()) {
                 string += nota.getPitch().getOctave().toBraille() + " = ";
@@ -81,4 +90,5 @@ public class Measure implements Brailleable {
         }
         return string;
     }
+
 }
