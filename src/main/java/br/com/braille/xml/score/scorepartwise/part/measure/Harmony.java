@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "harmony")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Harmony implements Brailleable {
+    // Método exclusivo notação braille
+    private int brailleSize;
 
     @XmlElement(name = "root")
     private Root root;
@@ -32,11 +34,20 @@ public class Harmony implements Brailleable {
         String string = "";
         string += root.toBraille();
         string += kind.toBraille();
+        if (!kind.toBraille().isEmpty()) {
+            brailleSize = 2;
+        } else {
+            brailleSize = 1;
+        }
         return string;
     }
 
     @Override
     public String toString() {
         return root.toString() + kind.toString();
+    }
+
+    public int getBrailleSize() {
+        return brailleSize;
     }
 }
