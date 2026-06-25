@@ -5,6 +5,9 @@ import br.com.braille.service.Desempacotador;
 import br.com.braille.xml.score.ScorePartwise;
 import br.com.braille.xml.score.scorepartwise.part.Measure;
 import br.com.braille.xml.score.scorepartwise.part.measure.Note;
+import org.w3c.dom.ls.LSOutput;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,39 +28,79 @@ public class Score implements Brailleable {
 
     @Override
     public String toBraille() {
-        String string;
+        String string = "";
+        String noteLine = "";
+        List<String> noteLines = new ArrayList<>();
+        String harmonyLine = "";
+        List<String> harmonyLines = new ArrayList<>();
+        List<String> cabecalho = new ArrayList<>();
         List<Measure> compassos = this.getScorePartwise().getParts().get(0).getMeasures();
+        String whiteSpace;
         boolean imprimiuClave = false;
+        int tamanhoEmBranco;
 
         // Título
-        string = this.getScorePartwise().getCredits().get(0).toBraille();
+        cabecalho.add(this.getScorePartwise().getCredits().get(0).toBraille());
 
         // Fórmula de compasso
-        string += "\n" + compassos.get(0).getAttributes().getTime().toBraille();
+        cabecalho.add(compassos.get(0).getAttributes().getTime().toBraille());
 
         // Compassos
         for (int i = 0; i < compassos.size(); i++) {
-            // Imprime nova linha conforme padronizado pelo musicxml
-            if (compassos.get(i).isPrint()) {
-                string += "\n";
-            }
             // Clave
             if (!imprimiuClave) {
-                string += compassos.get(0).getAttributes().getClef().toBraille() + " ";
+                noteLine += compassos.get(0).getAttributes().getClef().toBraille() + " ";
                 imprimiuClave = true;
             }
+            // Salva as notas do compasso
+            noteLine += compassos.get(i).toBraille();
 
-            // Imprime as notas do compasso
-            string += compassos.get(i).toBraille();
+            // Salva as partes da harmonia para imprimir depois
+            // Calcula os espaços em branco
+            if (compassos.get(i).getHarmony() == null) {
+                tamanhoEmBranco = compassos.get(i).getBrailleSize();
+            } else {
+                tamanhoEmBranco = compassos.get(i).getBrailleSize() - compassos.get(i).getHarmony().getBrailleSize();
+            }
 
-            // Imprime a separação de compassos
-            string += " ";
+            // adiciona o tamanho em branco
+            whiteSpace = "";
+            for (int j = 0; j <= tamanhoEmBranco; j++) {
+                whiteSpace += " ";
+            }
+
+            harmonyLine += whiteSpace;
+
+            if (compassos.get(i).getHarmony() != null) {
+                harmonyLine += compassos.get(i).getHarmony().toBraille();
+            }
+
+            // Salva a seperação entre compassos
+            noteLine += " ";
+
+            // Imprime nova linha conforme padronizado pelo musicxml
+            if (i == (compassos.size() - 1) || (compassos.get(i).isPrint() && i != 0)) {
+                harmonyLines.add(harmonyLine);
+                harmonyLine = "";
+                noteLines.add(noteLine);
+                noteLine = "";
+            }
+        }
+
+        for (int i = 0; i < noteLines.size(); i++) {
+            string += noteLines.get(i) + "\n";
+            System.out.println(noteLines.get(i));
+            if (harmonyLines.size() > i) {
+                string += harmonyLines.get(i) + "\n";
+                System.out.println(harmonyLines.get(i));
+            }
         }
         return string;
     }
 
     @Override
     public String toString() {
+        int linha = 3;
         String string;
         List<Measure> compassos = this.getScorePartwise().getParts().get(0).getMeasures();
         boolean imprimiuClave = false;
@@ -66,18 +109,21 @@ public class Score implements Brailleable {
 
         // Título
         String titulo = this.getScorePartwise().getCredits().get(0).getCreditWords();
+        string += "Linha 1\n";
         string += "Título: " + this.getScorePartwise().getCredits().get(0).toBraille() + "\n";
         string += "Título: " + titulo + "\n\n";
 
         // Fórmula de compasso
+        string += "Linha 2\n";
         string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toBraille() + "\n";
         string += "Fórmula de compasso: " + compassos.get(0).getAttributes().getTime().toString() + "\n";
 
         // Compassos
         for (int i = 0; i < compassos.size(); i++) {
-//            if (compassos.get(i).isPrint()) {
-//                string += "\n";
-//            }
+            if (compassos.get(i).isPrint()) {
+                string += "\n" + "Linha " + linha + "\n";
+                linha++;
+            }
             if (!imprimiuClave) {
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().toBraille() + " \n";
                 string += "Clave: " + compassos.get(0).getAttributes().getClef().toString() + " \n";
