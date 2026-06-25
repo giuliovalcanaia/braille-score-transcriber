@@ -102,7 +102,7 @@ public class ScoreTest {
     public void validaNotasHarmoniaSegundoCompasso() {
         Measure measure2 = scorePartwise.getParts().get(0).getMeasures().get(1);
 
-        Harmony harmony = measure2.getHarmonies().get(0);
+        Harmony harmony = measure2.getHarmony();
         assertEquals(RootStep.G, harmony.getRoot().getRootStep());
         assertEquals(Kind.MAJOR, harmony.getKind());
 
@@ -170,7 +170,7 @@ public class ScoreTest {
         assertEquals("2", direita.getEnding().getNumber());
         assertEquals(EndingType.DISCONTINUE, direita.getEnding().getType());
 
-        Harmony harmony = compasso17.getHarmonies().get(0);
+        Harmony harmony = compasso17.getHarmony();
         assertEquals(RootStep.G, harmony.getRoot().getRootStep());
         assertEquals(Kind.MAJOR, harmony.getKind());
 
@@ -206,7 +206,7 @@ public class ScoreTest {
 
         assertNull(compasso26.getAttributes());
 
-        assertTrue(compasso26.getHarmonies().isEmpty());
+        assertNull(compasso26.getHarmony());
 
         Barline barline = compasso26.getBarlines().get(0);
         assertEquals(Location.RIGHT, barline.getLocation());
